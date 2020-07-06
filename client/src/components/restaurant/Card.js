@@ -2,12 +2,12 @@ import React from "react";
 import styled from "styled-components";
 
 const CardWrapper = styled.div`
-  @media (min-width: 1000px) {
-    width: 30%;
+  @media (min-width: 800px) {
+    width: 25rem;
   }
-  @media (min-width: 800px) and (max-width: 1000px) {
+  /* @media (min-width: 800px) and (max-width: 1000px) {
     width: 45%;
-  }
+  } */
   @media (max-width: 800px) {
     width: 80%;
     margin: auto;
@@ -36,25 +36,31 @@ const CardContent = styled.div`
 const Name = styled.h5`
   font-size: 3rem;
   font-weight: 700;
+  line-height: 1.0;
+  margin-bottom: 0.5rem;
 `;
 
 const Description = styled.p`
-  font-size: 2.5rem;
+  font-size: 2rem;
   color: ${(props) => props.theme.colors.grey};
 `;
 const Price = styled.p`
-  font-size: 2rem;
+  font-size: 2.5rem;
   color: ${(props) => props.theme.colors.grey};
+  margin-bottom: 0.5rem;
 `;
 
 export default function Card({ name, description, price, imageUrl }) {
   return (
     <CardWrapper>
-      <CardImage src={imageUrl ? imageUrl : null} alt={name} />
+      {imageUrl ? (
+        <CardImage src={imageUrl ? imageUrl : null} alt={name} />
+      ) : null}
+
       <CardContent>
         <Name>{name}</Name>
-        <Description>{description}</Description>
         <Price>{price}</Price>
+        <Description>{description}</Description>
       </CardContent>
     </CardWrapper>
   );

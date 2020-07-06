@@ -4,9 +4,8 @@ import styled from "styled-components";
 import Button from "../utility/Button";
 
 const Nav = styled.nav`
-  height: 5rem;
   width: 100vw;
-  padding: 2rem 5rem;
+  padding: 1rem 5rem;
   display: flex;
   justify-content: flex-end;
 `;
@@ -22,10 +21,14 @@ export default function NavBar() {
     <Nav>
       <ButtonGroup>
         <Link style={{ marginRight: "2rem" }} to="/users/login">
-          <Button style={{ marginRight: "2rem" }}>Log In</Button>
+          <Button color="white" style={{ marginRight: "2rem" }}>
+            Log In
+          </Button>
         </Link>
         <Link to="/users/create">
-          <Button variant="filled">Sign Up</Button>
+          <Button variant="filled">
+            Sign Up
+          </Button>
         </Link>
       </ButtonGroup>
     </Nav>

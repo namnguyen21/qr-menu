@@ -9,7 +9,8 @@ import { createCategoriesList } from "../../helperFunctions";
 
 const Container = styled.div`
   height: 70vh;
-  width: 100%;
+  margin: auto;
+  width: 90rem;
 `;
 const Title = styled.h2`
   font-size: 4rem;
@@ -28,10 +29,10 @@ const PanelTitle = styled.h3`
 const Panel = styled.div`
   width: 100%;
   min-height: 50rem;
-  border: solid 1px ${(props) => props.theme.colors.grey};
+  background-color: ${(props) => props.theme.colors.white};
   border-radius: 1rem;
   position: relative;
-  padding: 1rem 2rem 2rem;
+  padding: 2rem;
 `;
 
 const IconButton = styled.div`
@@ -74,7 +75,7 @@ const Sort = styled.div`
 `;
 
 const Select = styled.select`
-  width: 20rem;
+  width: 10rem;
   height: 3rem;
   font-size: 1.6rem;
 `;
@@ -142,7 +143,7 @@ export default function Dashboard() {
         setOpen={setOpen}
       ></EditModal>
       <Title>Restaurant Name</Title>
-      <Panel>
+      <Panel className="box-shadow">
         <Settings>
           <Sort>
             <Label>Sort by category: </Label>
@@ -161,6 +162,7 @@ export default function Dashboard() {
             href="https://res.cloudinary.com/djuq5cwgy/image/upload/fl_attachment/v1593727257/qrmenu/k4vbakel4ak1afqcm55a.jpg"
             download
             target="_blank"
+            style={{marginRight: '2rem'}}
           >
             <Button variant="contained">Get QR Code</Button>
           </a>

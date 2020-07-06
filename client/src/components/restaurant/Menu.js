@@ -6,7 +6,8 @@ import Card from "./Card";
 import { createCategoriesList } from "../../helperFunctions";
 
 const Container = styled.div`
-  width: 100%;
+  width: 80vw;
+  margin: auto;
 `;
 
 const Heading = styled.h2`

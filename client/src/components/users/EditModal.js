@@ -134,6 +134,8 @@ export default function EditModal({ open, setOpen, categories }) {
       .then((response) => {
         if (response.status === 200) {
           setLoading(false);
+          console.log(response);
+          setOpen(false);
           dispatch({ type: "ADD_ITEM", payload: response.data });
         } else {
           setError("Oops, something went wrong. Please try again.");

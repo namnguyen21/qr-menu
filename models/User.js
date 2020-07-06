@@ -34,6 +34,11 @@ module.exports = function (sequelize, DataTypes) {
       onDelete: "cascade",
       as: "UserMenuItems",
     });
+    Users.hasOne(models.qr, {
+      foreignKey: "userId",
+      onDelete: "cascade",
+      as: "UserQr",
+    });
   };
 
   return Users;

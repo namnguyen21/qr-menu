@@ -7,9 +7,6 @@ const GlobalStyle = createGlobalStyle`
       font-size: 10px;
       font-family: "Lato", sans-serif;
       box-sizing: border-box;
-      @media(max-width: 800px) {
-          font-size: 8px;
-      }
     }
     body {
         background-color: #f3f7f9

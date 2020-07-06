@@ -6,7 +6,7 @@ import Button from "../utility/Button";
 import InputGroup from "../utility/InputGroup";
 
 const Container = styled.div`
-  width: 60rem;
+  width: 70rem;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -23,6 +23,22 @@ const Form = styled.form`
   box-shadow: 6px 4px 26px -6px rgba(0, 0, 0, 0.66); */
 `;
 
+const Section = styled.div`
+  display: grid;
+  grid-template-columns: 20rem auto;
+  margin-bottom: 2rem;
+`;
+
+const SectionLabel = styled.p`
+  padding: 1rem;
+  font-size: 2rem;
+  color: ${(props) => props.theme.colors.grey};
+`;
+
+const InputSection = styled.div`
+  padding: 1rem;
+`;
+
 const Group = styled.div`
   width: 100%;
   &:not(:last-child) {
@@ -31,10 +47,10 @@ const Group = styled.div`
 `;
 
 const StyledInputGroup = styled(InputGroup)`
-  &:not(:last-child){
+  &:not(:last-child) {
     margin-bottom: 1rem;
   }
-`
+`;
 
 const Btn = styled(Button)`
   width: 100%;
@@ -94,103 +110,64 @@ export default function CreateUser() {
     <Redirect to="/users/login" />
   ) : (
     <Container>
-      <Form className='box-shadow' onSubmit={onSubmit}>
-        <StyledInputGroup
-          style={{ marginBottom: "2rem" }}
-          label="Name"
-          value={name}
-          type="text"
-          placeholder="John Doe"
-          onChange={(e) => setName(e.target.value)}
-        />
-        <StyledInputGroup
-          style={{ marginBottom: "2rem" }}
-          label="Email"
-          value={email}
-          placeholder="johndoe@gmail.com"
-          onChange={(e) => setEmail(e.target.value)}
-          type="text"
-        />
-        {/* <Group>
-          <Label>Email</Label>
-          <Input
-            placeholder="johndoe@gmail.com"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </Group> */}
-        {/* <Group>
-          <Label>Email</Label>
-          <Input
-            placeholder="johndoe@gmail.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </Group> */}
-        <StyledInputGroup
-          style={{ marginBottom: "2rem" }}
-          label="Restaurant Name"
-          value={restaurant}
-          placeholder="In N Out"
-          onChange={(e) => setRestaurant(e.target.value)}
-          type="text"
-        />
-        {/* <Group>
-          <Label>Restaurant Name</Label>
-          <Input
-            placeholder="In N Out"
-            value={restaurant}
-            onChange={(e) => setRestaurant(e.target.value)}
-          />
-        </Group> */}
-        <StyledInputGroup
-          style={{ marginBottom: "2rem" }}
-          label="Phone Number"
-          value={phone}
-          placeholder="123-456-7890"
-          onChange={(e) => setPhone(e.target.value)}
-          type="text"
-        />
-        {/* <Group>
-          <Label>Phone Number</Label>
-          <Input
-            placeholder="123-456-7890"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-          />
-        </Group> */}
-        <StyledInputGroup
-          style={{ marginBottom: "2rem" }}
-          label="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          type="password"
-        />
-        {/* <Group>
-          <Label>Password</Label>
-          <Input
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            type="password"
-          />
-        </Group> */}
-        <StyledInputGroup
-          style={{ marginBottom: "2rem" }}
-          label="Re-enter Password"
-          value={rePassword}
-          onChange={(e) => setRePassword(e.target.value)}
-          type="password"
-        />
-        {/* <Group>
-          <Label>Re-enter Password</Label>
-          <Input
-            placeholder="Password"
-            value={rePassword}
-            onChange={(e) => setRePassword(e.target.value)}
-            type="password"
-          />
-        </Group> */}
+      <Form className="box-shadow" onSubmit={onSubmit}>
+        <Section>
+          <SectionLabel>Personal Information</SectionLabel>
+          <InputSection>
+            <StyledInputGroup
+              style={{ marginBottom: "2rem" }}
+              label="Name"
+              value={name}
+              type="text"
+              placeholder="John Doe"
+              onChange={(e) => setName(e.target.value)}
+            />
+            <StyledInputGroup
+              style={{ marginBottom: "2rem" }}
+              label="Email"
+              value={email}
+              placeholder="johndoe@gmail.com"
+              onChange={(e) => setEmail(e.target.value)}
+              type="text"
+            />
+            <StyledInputGroup
+              style={{ marginBottom: "2rem" }}
+              label="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              type="password"
+            />
+
+            <StyledInputGroup
+              style={{ marginBottom: "2rem" }}
+              label="Re-enter Password"
+              value={rePassword}
+              onChange={(e) => setRePassword(e.target.value)}
+              type="password"
+            />
+          </InputSection>
+        </Section>
+        <Section>
+          <SectionLabel>Business Information</SectionLabel>
+          <InputSection>
+            <StyledInputGroup
+              style={{ marginBottom: "2rem" }}
+              label="Restaurant Name"
+              value={restaurant}
+              placeholder="In N Out"
+              onChange={(e) => setRestaurant(e.target.value)}
+              type="text"
+            />
+            <StyledInputGroup
+              style={{ marginBottom: "2rem" }}
+              label="Phone Number"
+              value={phone}
+              placeholder="123-456-7890"
+              onChange={(e) => setPhone(e.target.value)}
+              type="text"
+            />
+          </InputSection>
+        </Section>
         {error ? (
           <Group>
             <ErrorMessage>{error}</ErrorMessage>

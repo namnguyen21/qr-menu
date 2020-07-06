@@ -5,21 +5,35 @@ import { useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import Button from "../utility/Button";
 import InputGroup from "../utility/InputGroup";
+import Food from "../../images/plate.svg";
 
 const Container = styled.div`
-  width: 30rem;
+  width: 80vw;
   position: absolute;
   top: 50%;
-  right: 0;
-  transform: translateY(-50%);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+`;
+
+const Heading = styled.h2`
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
+`;
+
+const Image = styled.img`
+  width: 40rem;
 `;
 
 const Form = styled.form`
-  width: 100%;
+  width: 40rem;
   padding: 5rem 1rem;
   background-color: ${(props) => props.theme.colors.white};
   border-radius: 1rem;
-  margin-left: auto;
 `;
 
 const Group = styled.div`
@@ -27,18 +41,6 @@ const Group = styled.div`
   &:not(:last-child) {
     margin-bottom: 1rem;
   }
-`;
-
-const Label = styled.label`
-  font-size: 1.6rem;
-  font-weight: 700;
-`;
-
-const Input = styled.input`
-  margin-top: 1rem;
-  width: 100%;
-  padding: 1rem;
-  font-size: 1.6rem;
 `;
 
 const Btn = styled(Button)`
@@ -49,6 +51,10 @@ const ErrorMessage = styled.p`
   font-size: 1.6rem;
   font-weight: 700;
   color: red;
+`;
+
+const StyledInputGroup = styled(InputGroup)`
+  margin-bottom: 2rem;
 `;
 
 export default function Login() {
@@ -94,24 +100,21 @@ export default function Login() {
     <Redirect to="/users/dashboard" />
   ) : (
     <Container>
+      <Image src={Food} alt="Plate of food" />
       <Form className="box-shadow" onSubmit={onSubmit}>
-        <Group>
-          <Label>Email</Label>
-          <Input
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="johndoe@gmail.com"
-          />
-        </Group>
-        <Group>
-          <Label>Password</Label>
-          <Input
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            type="password"
-            placeholder="Password"
-          />
-        </Group>
+        <Heading>Log In</Heading>
+        <StyledInputGroup
+          value={email}
+          label="Email"
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="johndoe@gmail.com"
+        />
+        <StyledInputGroup
+          value={password}
+          label="Password"
+          type="password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
         {error ? (
           <Group>
             <ErrorMessage>{error}</ErrorMessage>

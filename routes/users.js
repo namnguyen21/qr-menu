@@ -2,7 +2,17 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const qr = require("qr-image");
+const cloudinary = require("cloudinary").v2;
 const db = require("../models");
+
+console.log(process.env);
+
+//cloudinary for file upload
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_API_NAME,
+  api_key: "814754145751996",
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 router.post("/create", (req, res) => {
   console.log(req.body);
@@ -29,8 +39,34 @@ router.post("/create", (req, res) => {
           const qrSvg = qr.image(`http://localhost:3000/restaurant/${id}`, {
             type: "png",
           });
-          qrSvg.pipe(require("fs").createWriteStream("i_love_qr.png"));
-          res.json({ id, name, email, restaurant, phone });
+          qrSvg.pipe(require("fs").createWriteStream("qr.png"));
+          cloudinary.uploader.upload(
+            "qr.png",
+            { resource_type: "image" },
+            (err, clResult) => {
+              if (err) console.log(err);
+              else {
+                console.log(clResult);
+                const { url } = clResult;
+                db.qr
+                  .create({
+                    url,
+                    userId: id,
+                  })
+                  .then((newQr) => {
+                    res.json({
+                      id,
+                      name,
+                      email,
+                      restaurant,
+                      phone,
+                      newQr,
+                    });
+                  });
+              }
+            }
+          );
+          // res.json({ id, name, email, restaurant, phone });
         });
       }
     });
@@ -50,7 +86,7 @@ router.post("/login", (req, res) => {
         res.json({ message: "Sorry, no account found with that email." });
       } else {
         const { dataValues: data } = response;
-        if (await bcrypt.compare(req.body.password, data.password)) {
+        if (await bcrypt.compare(password, data.password)) {
           res.json({
             id: data.id,
             name: data.name,

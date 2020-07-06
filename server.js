@@ -1,5 +1,6 @@
 const express = require("express");
 const db = require("./models");
+require("dotenv").config();
 
 // db connection
 require("./database/connection");
@@ -15,7 +16,7 @@ app.use("/users", require("./routes/users"));
 app.use("/menu", require("./routes/menu"));
 app.use("/restaurant", require("./routes/restaurant"));
 
-db.sequelize.sync({ force: false}).then(function () {
+db.sequelize.sync({ force: true }).then(function () {
   app.listen(PORT, function () {
     console.log("App listening on PORT " + PORT);
   });

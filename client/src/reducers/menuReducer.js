@@ -13,7 +13,11 @@ export default (state = INITIAL_STATE, action) => {
         display: action.payload,
       };
     case "ADD_ITEM":
-      return { ...state, items: [...state.items, action.payload] };
+      return {
+        ...state,
+        items: [...state.items, action.payload],
+        display: [...state.display, action.payload],
+      };
     case "CHANGE_DISPLAY":
       return { ...state, display: action.payload };
     case "EDIT_ITEM":

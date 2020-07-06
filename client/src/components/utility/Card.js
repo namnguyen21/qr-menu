@@ -32,11 +32,9 @@ const CardTitle = styled.h3`
 `;
 
 const CardDescription = styled.p`
-  font-size: 2rem;
+  font-size: 1.6rem;
   height: auto;
   color: ${(props) => props.theme.colors.grey};
-
-  margin-bottom: 1rem;
 `;
 
 const Flex = styled.div`
@@ -45,8 +43,9 @@ const Flex = styled.div`
 `;
 
 const Price = styled.p`
-  font-size: 1.6rem;
+  font-size: 2rem;
   color: ${(props) => props.theme.colors.grey};
+  margin-bottom: 1rem;
 `;
 
 const Label = styled.label`
@@ -124,7 +123,7 @@ export default function Card({
   };
 
   return (
-    <CardWrapper>
+    <CardWrapper className="box-shadow">
       {imageUrl ? <CardImage alt={name} src={imageUrl} /> : null}
       <CardContent>
         {edit ? (
@@ -135,17 +134,17 @@ export default function Card({
               value={itemName}
               onChange={(e) => setItemName(e.target.value)}
             />
-            <Label>Description</Label>
-            <Input
-              type="text"
-              value={itemDescription}
-              onChange={(e) => setItemDescription(e.target.value)}
-            />
             <Label>Price</Label>
             <Input
               type="text"
               value={itemPrice}
               onChange={(e) => setItemPrice(e.target.value)}
+            />
+            <Label>Description</Label>
+            <Input
+              type="text"
+              value={itemDescription}
+              onChange={(e) => setItemDescription(e.target.value)}
             />
             {warning ? (
               <Warning>Click 'delete' icon again to confirm.</Warning>
@@ -163,9 +162,9 @@ export default function Card({
         ) : (
           <React.Fragment>
             <CardTitle>{name}</CardTitle>
-            <CardDescription>{description}</CardDescription>
+            <Price>{price}</Price>
             <Flex>
-              <Price>{price}</Price>
+              <CardDescription>{description}</CardDescription>
               <IconButton onClick={() => setEdit(!edit)}>
                 <i className="fas fa-pencil-alt"></i>
               </IconButton>

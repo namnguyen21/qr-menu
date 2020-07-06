@@ -16,10 +16,8 @@ const Btn = styled.button`
   text-align: center;
   cursor: pointer;
   color: ${(props) =>
-    props.variant === "filled" && props.color === "white"
-      ? props.theme.colors.primary
-      : props.variant === "filled"
-      ? props.theme.colors.white
+    props.variant === "filled" && props.color === 'white'
+      ? props.theme.colors.primary : props.variant==='filled'? props.theme.colors.white
       : props.theme.colors.primary};
   background-color: ${(props) =>
     props.variant === "filled" && props.color === "white"
@@ -51,12 +49,7 @@ export default function Button({
   color,
 }) {
   return (
-    <Btn
-      color={color}
-      onClick={onClick}
-      variant={variant}
-      className={className}
-    >
+    <Btn color={color} onClick={onClick} variant={variant} className={className}>
       {children}
     </Btn>
   );
