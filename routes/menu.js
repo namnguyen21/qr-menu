@@ -12,6 +12,7 @@ router.get("/:userId", (req, res) => {
         userId: userId,
       },
       raw: true,
+      order: [["category", "ASC"]],
     })
     .then((response) => {
       res.json(response);
@@ -24,6 +25,7 @@ router.post("/", (req, res) => {
 });
 
 router.patch("/edit/:id", (req, res) => {
+  console.log(req.body);
   const { id: itemId } = req.params;
   db.menuItems
     .update(req.body, {

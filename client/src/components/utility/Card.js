@@ -1,14 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import IconButton from "./IconButton";
 import Button from "./Button";
 import User from "../classes/User";
+import Placeholder from "../../images/food-placeholder.png";
+import InputGroup from "../utility/InputGroup";
 
 const CardWrapper = styled.div`
   width: 30%;
   border-radius: 1rem;
   display: block;
+  @media (max-width: 800px) {
+    width: 80%;
+  }
+`;
+
+const CardImageWrapper = styled.div`
+  width: 100%;
+  border-top-right-radius: 1rem;
+  border-top-left-radius: 1rem;
+  position: relative;
+`;
+
+const ChangeImageButton = styled.i`
+  font-size: 2rem;
+  color: ${(props) => props.theme.colors.primary};
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 0.2rem;
 `;
 
 const CardImage = styled.img`
@@ -23,6 +46,9 @@ const CardContent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-color: ${(props) => props.theme.colors.white};
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
 `;
 const CardTitle = styled.h3`
   font-size: 2rem;
@@ -40,6 +66,7 @@ const CardDescription = styled.p`
 const Flex = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-top: 1rem;
 `;
 
 const Price = styled.p`
@@ -48,23 +75,28 @@ const Price = styled.p`
   margin-bottom: 1rem;
 `;
 
-const Label = styled.label`
-  font-size: 1.6rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-`;
-
-const Input = styled.input`
-  font-size: 1.6rem;
-  padding: 0.5rem;
-  &:not(:last-child) {
-    margin-bottom: 1rem;
-  }
-`;
-
 const Warning = styled.p`
   font-size: 1.6rem;
   color: orangered;
+  margin-top: 1rem;
+`;
+
+const ButtonGroup = styled.div`
+  margin-top: 1rem;
+  padding-top: 1rem;
+  width: 100%;
+  border-top: solid 1px #ccc;
+  display: flex;
+  justify-content: space-evenly;
+  i {
+    color: ${(props) => props.theme.colors.grey};
+    font-size: 2rem;
+    cursor: pointer;
+    transition: color 1s;
+    &:hover {
+      color: ${(props) => props.theme.colors.primary};
+    }
+  }
 `;
 
 export default function Card({
@@ -72,6 +104,7 @@ export default function Card({
   imageUrl,
   name,
   description,
+  category,
   price,
   onEditClick,
 }) {
@@ -81,6 +114,9 @@ export default function Card({
   const [warning, setWarning] = useState(false);
   const [itemDescription, setItemDescription] = useState(description);
   const [itemPrice, setItemPrice] = useState(price);
+
+  //create ref for image upload button
+  const imageUploader = useRef();
 
   const dispatch = useDispatch();
 
@@ -122,38 +158,91 @@ export default function Card({
     }
   };
 
+  const onEditImageClick = () => {
+    //open files
+    imageUploader.current.click();
+  };
+
+  // upload newly selected image and change current display
+  const onImageUpload = (e) => {
+    setTimeout(() => {}, 500);
+    const user = new User();
+    user
+      .editImage(id, { name, description, category, price }, e.target.files[0])
+      .then((response) => {
+        const { data } = response;
+        dispatch({
+          type: "EDIT_ITEM",
+          payload: {
+            id: data.id,
+            item: data,
+          },
+        });
+      });
+  };
+
   return (
     <CardWrapper className="box-shadow">
-      {imageUrl ? <CardImage alt={name} src={imageUrl} /> : null}
+      <CardImageWrapper>
+        <CardImage alt={name} src={imageUrl ? imageUrl : Placeholder} />
+        <ChangeImageButton
+          onClick={onEditImageClick}
+          className="fas fa-photo-video"
+        >
+          <input
+            onChange={onImageUpload}
+            ref={imageUploader}
+            type="file"
+            style={{ display: "none" }}
+            accept=".jpg,.png"
+          />
+        </ChangeImageButton>
+      </CardImageWrapper>
+
       <CardContent>
         {edit ? (
           <React.Fragment>
-            <Label>Name of Dish</Label>
-            <Input
+            <InputGroup
+              label="Name of Dish"
               type="text"
               value={itemName}
               onChange={(e) => setItemName(e.target.value)}
             />
-            <Label>Price</Label>
+            {/* <Label>Name of Dish</Label>
+            <Input
+              type="text"
+              value={itemName}
+              onChange={(e) => setItemName(e.target.value)}
+            /> */}
+            <InputGroup
+              type="text"
+              label="Price"
+              value={itemPrice}
+              onChange={(e) => setItemPrice(e.target.value)}
+            />
+            {/* <Label>Price</Label>
             <Input
               type="text"
               value={itemPrice}
               onChange={(e) => setItemPrice(e.target.value)}
+            /> */}
+            <InputGroup
+              label="Description"
+              value={itemDescription}
+              type="text"
+              onChange={(e) => setItemDescription(e.target.value)}
             />
-            <Label>Description</Label>
+            {/* <Label>Description</Label>
             <Input
               type="text"
               value={itemDescription}
               onChange={(e) => setItemDescription(e.target.value)}
-            />
-            {warning ? (
+            /> */}
+            {/* {warning ? (
               <Warning>Click 'delete' icon again to confirm.</Warning>
-            ) : null}
+            ) : null} */}
             <Flex>
               <Button onClick={() => setEdit(false)}>Cancel</Button>
-              <Button onClick={onDelete} variant="filled">
-                <i className="far fa-trash-alt"></i>
-              </Button>
               <Button onClick={onEditSubmit} variant="filled">
                 Submit
               </Button>
@@ -163,12 +252,23 @@ export default function Card({
           <React.Fragment>
             <CardTitle>{name}</CardTitle>
             <Price>{price}</Price>
-            <Flex>
-              <CardDescription>{description}</CardDescription>
+            <CardDescription>{description}</CardDescription>
+            {warning ? (
+              <Warning>Click 'delete' icon again to confirm.</Warning>
+            ) : null}
+            {/* <Flex>
+              
               <IconButton onClick={() => setEdit(!edit)}>
                 <i className="fas fa-pencil-alt"></i>
               </IconButton>
-            </Flex>
+            </Flex> */}
+            <ButtonGroup>
+              <i onClick={onDelete} className="far fa-trash-alt"></i>
+              <i
+                onClick={() => setEdit(!edit)}
+                className="fas fa-pencil-alt"
+              ></i>
+            </ButtonGroup>
           </React.Fragment>
         )}
       </CardContent>

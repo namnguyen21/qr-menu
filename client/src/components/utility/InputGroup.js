@@ -25,6 +25,9 @@ const Input = styled.input`
     font-weight: 100;
     letter-spacing: 1.5;
   }
+  &:focus {
+    box-shadow: 0 0 1pt 1pt blue;
+  }
 `;
 
 export default function InputGroup({
@@ -40,7 +43,7 @@ export default function InputGroup({
       {label ? <Label>{label}</Label> : null}
       <Input
         type={type}
-        placeholder={placeholder}
+        // placeholder={placeholder}
         value={value}
         onChange={onChange}
       />

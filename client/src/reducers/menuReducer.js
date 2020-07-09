@@ -20,6 +20,8 @@ export default (state = INITIAL_STATE, action) => {
       };
     case "CHANGE_DISPLAY":
       return { ...state, display: action.payload };
+    case "CLEAR_SORTED":
+      return { ...state, display: [...state.items] };
     case "EDIT_ITEM":
       console.log("hitting");
       const filteredItems = state.items.filter(

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -16,6 +16,9 @@ const Container = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  @media (max-width: 800px) {
+    flex-direction: column;
+  }
 `;
 
 const Heading = styled.h2`
@@ -26,7 +29,10 @@ const Heading = styled.h2`
 `;
 
 const Image = styled.img`
-  width: 40rem;
+  width: 39rem;
+  text-align: center;
+  transform: translateY(4px);
+  z-index: -10;
 `;
 
 const Form = styled.form`
@@ -58,12 +64,20 @@ const StyledInputGroup = styled(InputGroup)`
 `;
 
 export default function Login() {
+  const dispatch = useDispatch();
+  // hook up current path to state
+  useEffect(() => {
+    dispatch({
+      type: "CURRENT_PATH",
+      payload: "login",
+    });
+  });
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   // redirect once logged in
   const [redirect, setRedirect] = useState(false);
-  const dispatch = useDispatch();
 
   //form submission
   const onSubmit = (e) => {
@@ -121,7 +135,7 @@ export default function Login() {
           </Group>
         ) : null}
         <Group>
-          <Btn variant="filled">Login</Btn>
+          <Btn variant="filled">Log In</Btn>
         </Group>
       </Form>
     </Container>

@@ -135,7 +135,11 @@ export default function EditModal({ open, setOpen, categories }) {
         if (response.status === 200) {
           setLoading(false);
           console.log(response);
-          setOpen(false);
+          setName("");
+          setCategory("");
+          setDescription("");
+          setPrice("");
+          setImage("");
           dispatch({ type: "ADD_ITEM", payload: response.data });
         } else {
           setError("Oops, something went wrong. Please try again.");
@@ -232,6 +236,7 @@ export default function EditModal({ open, setOpen, categories }) {
               type="file"
               onChange={onFileSelection}
               name="file"
+              accept=".jpg,.png"
             />
             <Button variant="filled">Submit</Button>
             {loading ? (

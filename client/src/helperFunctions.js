@@ -1,4 +1,5 @@
 export const createCategoriesList = (allMenuObjects) => {
+  console.log(allMenuObjects)
   // receive array of menu objects
   const categories = allMenuObjects.map((item) => item.category);
 
@@ -26,4 +27,22 @@ export const createCategoriesList = (allMenuObjects) => {
   const noDuplicates = Object.keys(map);
 
   return noDuplicates.map((item) => item[0].toUpperCase() + item.substr(1));
+};
+
+export const separateCategories = (menuItems) => {
+  // will receive array of objects as param
+  //get unique categories
+  const categories = createCategoriesList(menuItems);
+  const result = [];
+
+  for (let i = 0; i < categories.length; i++) {
+    let itemsInCategory = menuItems.filter((item) => {
+      return item.category.trim().toLowerCase() === categories[i].toLowerCase();
+    });
+    result.push({
+      category: categories[i],
+      items: itemsInCategory,
+    });
+  }
+  return result;
 };

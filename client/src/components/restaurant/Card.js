@@ -4,14 +4,18 @@ import styled from "styled-components";
 const CardWrapper = styled.div`
   @media (min-width: 800px) {
     width: 25rem;
+    margin: 2rem;
   }
   /* @media (min-width: 800px) and (max-width: 1000px) {
     width: 45%;
   } */
   @media (max-width: 800px) {
     width: 80%;
-    margin: auto;
+    margin: 2rem auto;
   }
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 
   border-radius: 1rem;
   background-color: ${(props) => props.theme.colors.white};
@@ -36,7 +40,7 @@ const CardContent = styled.div`
 const Name = styled.h5`
   font-size: 3rem;
   font-weight: 700;
-  line-height: 1.0;
+  line-height: 1;
   margin-bottom: 0.5rem;
 `;
 

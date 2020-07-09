@@ -7,7 +7,6 @@ const Wrapper = styled.div`
   }
   margin: auto;
   min-height: calc(100vh - 5rem);
-  position: relative;
 `;
 
 export default function Container({ children }) {

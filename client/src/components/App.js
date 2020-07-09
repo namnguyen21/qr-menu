@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { ThemeProvider } from "styled-components";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import NavBar from "./nav/NavBar";
@@ -31,17 +31,19 @@ export default function App() {
         <GlobalStyles />
         <NavBar />
         <Container>
-          <Route path="/" exact component={Landing} />
-          <Route path="/users/create" exact component={CreateUser} />
-          <Route path="/users/login" exact component={Login} />
-          <Route path="/users/dashboard" exact component={Dashboard} />
-          {/* <ProtectedRoute
-            exact
-            to="/users/dashboard"
-            component={Dashboard}
-            auth={auth.isSignedIn}
-          /> */}
-          <Route path="/restaurant/:id" exact component={RestaurantMenu} />
+          <Switch>
+            <Route path="/" exact component={Landing} />
+            <Route path="/users/create" exact component={CreateUser} />
+            <Route path="/users/login" exact component={Login} />
+            <Route path="/restaurant/:id" exact component={RestaurantMenu} />
+            {/* <Route path="/users/dashboard" exact component={Dashboard} /> */}
+            <ProtectedRoute
+              exact
+              to="/users/dashboard"
+              component={Dashboard}
+              auth={auth.isSignedIn}
+            />
+          </Switch>
         </Container>
       </Router>
     </ThemeProvider>

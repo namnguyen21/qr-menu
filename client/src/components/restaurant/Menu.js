@@ -3,58 +3,47 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import Restaurant from "../classes/Restaurant";
 import Card from "./Card";
-import { createCategoriesList } from "../../helperFunctions";
+import {
+  createCategoriesList,
+  separateCategories,
+} from "../../helperFunctions";
 
 const Container = styled.div`
-  width: 80vw;
+  width: 90vw;
   margin: auto;
 `;
 
 const Heading = styled.h2`
   font-size: 4rem;
-  color: ${(props) => props.theme.colors.black};
+  text-align: left;
+  display: inline-block;
+  margin-left: 2rem;
+  color: ${(props) => props.theme.colors.grey};
   font-weight: 700;
   margin-bottom: 1rem;
 `;
 
+const CardSection = styled.div`
+  background-color: ${(props) => props.theme.colors.white};
+  width: 100%;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-bottom: 4rem;
+`;
+
 const CardContainer = styled.div`
   width: 100%;
+  background-color: ${(props) => props.theme.colors.white};
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-evenly;
-  margin: -10px 0 0 0;
-  > * {
-    margin-top: 20px;
-  }
 `;
 
-const Label = styled.span`
-  font-size: 2rem;
-  margin-right: 2rem;
-`;
-
-const Select = styled.select`
-  width: 20rem;
-  height: 3rem;
-  font-size: 2rem;
-`;
-
-const Option = styled.option`
-  height: 3rem;
-  font-size: 3rem;
-`;
-
-const Flex = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  margin: 1rem 0;
-`;
-
-const Checkbox = styled.input`
-  height: 2.4rem;
+const CategoryName = styled.h4`
+  color: ${(props) => props.theme.colors.black};
+  font-size: 4rem;
+  font-weight: 300;
 `;
 
 export default function Menu(props) {
@@ -68,43 +57,45 @@ export default function Menu(props) {
   //restaurant info
   const currentRestaurant = useSelector((state) => state.restaurant);
   const { name, menu, display } = currentRestaurant;
+  // console.log(separateCategories(menu));
 
-  const categories = menu && createCategoriesList(menu);
+  // const categories = menu && createCategoriesList(menu);
 
   useEffect(() => {
     const restaurant = new Restaurant(restaurantId);
+
+    dispatch({
+      type: "CURRENT_PATH",
+      payload: "restaurant",
+    });
+
     restaurant.getMenu().then((response) => {
       if (response.data) {
+        console.log(response.data);
+        const separatedMenu = separateCategories(response.data.menu);
         dispatch({
           type: "FETCH_RESTAURANT_MENU",
-          payload: response.data,
+          payload: { menu: separatedMenu, name: response.data.restaurant },
         });
       }
     });
   }, []);
 
-  const onSelectChange = (e) => {
-    setSelectValue(e.target.value);
-    if (e.target.value.length > 0) {
-      dispatch({ type: "SORT_DISPLAY", payload: e.target.value });
-      setSorted(true);
-    } else {
-      dispatch({ type: "CLEAR_SORTED" });
-      setSorted(false);
-    }
-  };
-
-  const onClear = () => {
-    setSorted(false);
-    dispatch({
-      type: "CLEAR_SORTED",
-    });
-  };
+  // const onSelectChange = (e) => {
+  //   setSelectValue(e.target.value);
+  //   if (e.target.value.length > 0) {
+  //     dispatch({ type: "SORT_DISPLAY", payload: e.target.value });
+  //     setSorted(true);
+  //   } else {
+  //     dispatch({ type: "CLEAR_SORTED" });
+  //     setSorted(false);
+  //   }
+  // };
 
   return (
     <Container>
-      <Heading>Welcome to {name}</Heading>
-      <Flex>
+      <Heading>{name}</Heading>
+      {/* <Flex>
         <div>
           <Label>Browse by category: </Label>
           <Select value={selectValue} onChange={onSelectChange}>
@@ -116,8 +107,27 @@ export default function Menu(props) {
               ))}
           </Select>
         </div>
-      </Flex>
-      <CardContainer>
+      </Flex> */}
+      {menu &&
+        menu.map((category) => (
+          <CardSection>
+            <CategoryName>{category.category}</CategoryName>
+            <CardContainer>
+              {category.items.map((item) => {
+                return (
+                  <Card
+                    key={item.id}
+                    name={item.name}
+                    description={item.description}
+                    price={item.price}
+                    imageUrl={item.imageUrl ? item.imageUrl : null}
+                  />
+                );
+              })}
+            </CardContainer>
+          </CardSection>
+        ))}
+      {/* <CardContainer>
         {display
           ? display.map((item) => (
               <Card
@@ -129,7 +139,7 @@ export default function Menu(props) {
               />
             ))
           : null}
-      </CardContainer>
+      </CardContainer> */}
     </Container>
   );
 }

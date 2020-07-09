@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Redirect } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import axios from "axios";
 import Button from "../utility/Button";
 import InputGroup from "../utility/InputGroup";
@@ -63,6 +64,15 @@ const ErrorMessage = styled.p`
 `;
 
 export default function CreateUser() {
+  // hook up current path to state
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch({
+      type: "CURRENT_PATH",
+      payload: "create",
+    });
+  });
+
   //input fields
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -174,7 +184,7 @@ export default function CreateUser() {
           </Group>
         ) : null}
         <Group>
-          <Btn variant="filled">Submit</Btn>
+          <Btn variant="filled">Create Account</Btn>
         </Group>
       </Form>
     </Container>

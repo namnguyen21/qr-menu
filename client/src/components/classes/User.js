@@ -5,6 +5,18 @@ export default class User {
     this.id = id;
   }
 
+  postImage = async (imageFile) => {
+    const data = new FormData();
+    data.append("file", imageFile);
+    data.append("upload_preset", "qrmenu");
+    const response = await axios.post(
+      "https://api.cloudinary.com/v1_1/djuq5cwgy/image/upload",
+      data
+    );
+    // will return a url to the image src
+    return response.data.secure_url;
+  };
+
   getMenu = () => {
     return axios.get(`/menu/${this.id}`);
   };
@@ -14,15 +26,7 @@ export default class User {
     const { file, category, name, description, price } = item;
     console.log(file);
     if (file) {
-      const data = new FormData();
-      data.append("file", file);
-      data.append("upload_preset", "qrmenu");
-      const response = await axios.post(
-        " https://api.cloudinary.com/v1_1/djuq5cwgy/image/upload",
-        data
-      );
-      // will return a url to the image src
-      var imageUrl = response.data.secure_url;
+      var imageUrl = await this.postImage(file);
     }
 
     return axios.post("/menu", {
@@ -40,6 +44,11 @@ export default class User {
   }
 
   deleteMenuItem(itemId) {
-    return axios.delete(`/menu/delete/${itemId}`)
+    return axios.delete(`/menu/delete/${itemId}`);
+  }
+
+  editImage = async (itemId, item, newImage) => {
+    const imageUrl = await this.postImage(newImage);
+    return this.editMenuItem(itemId, { ...item, imageUrl });
   }
 }

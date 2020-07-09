@@ -1,4 +1,6 @@
 const express = require("express");
+const qr = require("qr-image");
+const qrcode = require("qrcode");
 const db = require("../models");
 
 const router = express.Router();
@@ -29,6 +31,22 @@ router.get("/menu/:id", (req, res) => {
         menu: UserMenuItems,
       });
     });
+});
+
+router.get("/qr/:id", (req, res) => {
+  const { id } = req.params;
+  // const qrCode = qr.image(`http://localhost:3000/restaurant/${id}`, {
+  //   type: "png",
+  // });
+  // res.type("png");
+  // res.set({ "Content-Type": "image/png" });
+  // qrCode.pipe(res);
+  qrcode.toDataURL(`https://localhost:3000/restaurant/${id}`, function (
+    err,
+    url
+  ) {
+    res.json(url);
+  });
 });
 
 module.exports = router;

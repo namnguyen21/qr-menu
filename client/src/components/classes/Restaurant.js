@@ -8,4 +8,8 @@ export default class Restaurant {
   getMenu() {
     return axios.get(`/restaurant/menu/${this.id}`);
   }
+
+  getQR() {
+    return axios.get(`/restaurant/qr/${this.id}`);
+  }
 }

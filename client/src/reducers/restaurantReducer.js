@@ -10,10 +10,8 @@ export default (state = INITIAL_STATE, action) => {
     case "FETCH_RESTAURANT_MENU":
       return {
         ...state,
-        id: action.payload.id,
-        name: action.payload.restaurant,
         menu: action.payload.menu,
-        display: action.payload.menu,
+        name: action.payload.name,
       };
     case "SORT_DISPLAY":
       return {

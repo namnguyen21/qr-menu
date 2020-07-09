@@ -2,17 +2,8 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const qr = require("qr-image");
-const cloudinary = require("cloudinary").v2;
 const db = require("../models");
 
-console.log(process.env);
-
-//cloudinary for file upload
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_API_NAME,
-  api_key: "814754145751996",
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
 
 router.post("/create", (req, res) => {
   console.log(req.body);
@@ -33,40 +24,8 @@ router.post("/create", (req, res) => {
         const hashedPassword = await bcrypt.hash(req.body.password, salt);
         const hashedUser = { ...req.body, password: hashedPassword };
         db.users.create(hashedUser).then((user) => {
-          console.log(user);
           const { id, name, email, restaurant, phone } = user.dataValues;
-          //create QR code for restaurant route
-          const qrSvg = qr.image(`http://localhost:3000/restaurant/${id}`, {
-            type: "png",
-          });
-          qrSvg.pipe(require("fs").createWriteStream("qr.png"));
-          cloudinary.uploader.upload(
-            "qr.png",
-            { resource_type: "image" },
-            (err, clResult) => {
-              if (err) console.log(err);
-              else {
-                console.log(clResult);
-                const { url } = clResult;
-                db.qr
-                  .create({
-                    url,
-                    userId: id,
-                  })
-                  .then((newQr) => {
-                    res.json({
-                      id,
-                      name,
-                      email,
-                      restaurant,
-                      phone,
-                      newQr,
-                    });
-                  });
-              }
-            }
-          );
-          // res.json({ id, name, email, restaurant, phone });
+          res.json({ id, name, email, restaurant, phone });
         });
       }
     });
@@ -87,12 +46,13 @@ router.post("/login", (req, res) => {
       } else {
         const { dataValues: data } = response;
         if (await bcrypt.compare(password, data.password)) {
+          console.log(data);
           res.json({
             id: data.id,
             name: data.name,
             email: data.email,
             phone: data.phone,
-            restaurant: data.phone,
+            restaurant: data.restaurant,
           });
         } else {
           res.json({ message: "Incorrect Password" });
@@ -100,5 +60,14 @@ router.post("/login", (req, res) => {
       }
     });
 });
+
+// router.get("/qr/:id", (req, res) => {
+//   const { id } = req.params;
+//   const qrCode = qr.image(`http://localhost:3000/restaurant/${id}`, {
+//     type: "png",
+//   });
+//   res.type("png");
+//   qrCode.pipe(res);
+// });
 
 module.exports = router;
