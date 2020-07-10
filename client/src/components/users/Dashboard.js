@@ -15,6 +15,9 @@ const Container = styled.div`
   width: 100%;
   background-color: ${(props) => props.theme.colors.white};
   padding: 1rem 5rem;
+  @media (max-width: 800px) {
+    padding: 1rem 2rem;
+  }
 `;
 const Title = styled.h2`
   font-size: 4rem;
@@ -57,6 +60,9 @@ const IconButton = styled.div`
   align-content: center;
   align-items: center;
   cursor: pointer;
+  @media (max-width: 800px) {
+    order: 4;
+  }
 `;
 
 const CardContainer = styled.div`
@@ -66,11 +72,11 @@ const CardContainer = styled.div`
   justify-content: space-evenly;
   align-items: flex-start;
   background-color: #f3f7f9;
-  padding: 1rem 2rem;
+  padding: 2rem 2rem;
   border-radius: 1rem;
-  margin: -10px 0 0 0;
+  margin: -10px 0 5rem 0;
   > * {
-    margin-top: 10px;
+    margin-top: 2rem;
   }
 `;
 
@@ -80,6 +86,9 @@ const Label = styled.span`
 
 const Sort = styled.div`
   margin-right: 2rem;
+  @media (max-width: 800px) {
+    order: 3;
+  }
 `;
 
 const Select = styled.select`
@@ -101,6 +110,19 @@ const Settings = styled.div`
   flex-wrap: wrap;
   > * {
     margin-top: 10px;
+  }
+`;
+
+const ResponsiveBtn = styled(Button)`
+  @media (max-width: 800px) {
+    order: 2;
+  }
+`;
+
+const ResponsiveA = styled.a`
+  margin-right: 2rem;
+  @media (max-width: 800px) {
+    order: 1;
   }
 `;
 
@@ -203,12 +225,14 @@ export default function Dashboard() {
                 <Option value="" selected disabled hidden></Option>
               </Select>
             </Sort>
-            <a style={{marginRight: '2rem'}} href={`/restaurant/${auth.id}`} target='_blank'>
-              <Button variant="contained">Go To Customer Menu</Button>
-            </a>
-            <Button onClick={onQrClick} variant="contained">
-              Download QR Code
-            </Button>
+            <ResponsiveA
+              style={{ marginRight: "2rem" }}
+              href={`/restaurant/${auth.id}`}
+              target="_blank"
+            >
+              <Button>Go To Customer Menu</Button>
+            </ResponsiveA>
+            <ResponsiveBtn onClick={onQrClick}>Download QR Code</ResponsiveBtn>
 
             <IconButton onClick={() => setOpen(!open)}>+</IconButton>
           </Settings>

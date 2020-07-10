@@ -8,8 +8,24 @@ const Nav = styled.nav`
   width: 100vw;
   padding: 1rem 5rem;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   min-height: 5rem;
+  @media (max-width: 800px) {
+    padding: 2rem;
+  }
+`;
+
+const Logo = styled.h1`
+  font-size: 3rem;
+  background: rgb(241, 12, 69);
+  font-family: ${(props) => props.theme.fonts.logo};
+  background: linear-gradient(
+    45deg,
+    rgba(241, 12, 69, 1) 15%,
+    rgba(255, 241, 0, 1) 96%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 `;
 
 const ButtonGroup = styled.div`
@@ -38,7 +54,7 @@ const LandingPageSignUp = styled.button`
   color: ${(props) => props.theme.colors.primary};
   border: none;
   outline: none;
-  border-radius: 1rem;
+  border-radius: 0.2rem;
   margin-left: 2rem;
   cursor: pointer;
   &:hover {
@@ -177,57 +193,74 @@ export default function NavBar() {
           <i className="fas fa-times"></i>
         </Exit>
         <Group>
-          <RespNavLink open={open} to="/users/login">
+          <RespNavLink
+            onClick={() => setOpen(false)}
+            open={open}
+            to="/users/login"
+          >
             Log In
           </RespNavLink>
-          <RespNavLink open={open} to="/users/create">
+          <RespNavLink
+            onClick={() => setOpen(false)}
+            open={open}
+            to="/users/create"
+          >
             Sign Up
           </RespNavLink>
         </Group>
       </Menu>
       {currentPath !== "landing" ? (
-        <ButtonGroup>
-          {auth.isSignedIn ? (
-            <Button onClick={onSignOut}>Sign Out</Button>
-          ) : (
-            <React.Fragment>
-              <StyledLink style={{ marginRight: "2rem" }} to="/users/login">
-                <Button color="white" style={{ marginRight: "2rem" }}>
-                  Log In
-                </Button>
-              </StyledLink>
-              <RespSignUpButton to="/users/create">
-                <Button variant="filled">Sign Up</Button>
-              </RespSignUpButton>
-              <Hamburger onClick={() => setOpen(!open)}>
-                <Burger />
-                <Burger />
-                <Burger />
-              </Hamburger>
-            </React.Fragment>
-          )}
-        </ButtonGroup>
-      ) : (
-        <ButtonGroup>
-          {auth.isSignedIn ? (
-            <Button onClick={onSignOut}>Sign Out</Button>
-          ) : (
-            <React.Fragment>
-              <LandingPageNavButton to="/users/login">
-                Log In
-              </LandingPageNavButton>
+        <React.Fragment>
+          <Link style={{ textDecoration: "none" }} to="/">
+            <Logo>Meal Time</Logo>
+          </Link>
 
-              <Link to="/users/create">
-                <LandingPageSignUp>Sign Up</LandingPageSignUp>
-              </Link>
-              <Hamburger onClick={() => setOpen(!open)}>
-                <Burger path={currentPath} />
-                <Burger path={currentPath} />
-                <Burger path={currentPath} />
-              </Hamburger>
-            </React.Fragment>
-          )}
-        </ButtonGroup>
+          <ButtonGroup>
+            {auth.isSignedIn ? (
+              <Button onClick={onSignOut}>Sign Out</Button>
+            ) : (
+              <React.Fragment>
+                <StyledLink style={{ marginRight: "2rem" }} to="/users/login">
+                  <Button color="white" style={{ marginRight: "2rem" }}>
+                    Log In
+                  </Button>
+                </StyledLink>
+                <RespSignUpButton to="/users/create">
+                  <Button variant="filled">Sign Up</Button>
+                </RespSignUpButton>
+                <Hamburger onClick={() => setOpen(!open)}>
+                  <Burger />
+                  <Burger />
+                  <Burger />
+                </Hamburger>
+              </React.Fragment>
+            )}
+          </ButtonGroup>
+        </React.Fragment>
+      ) : (
+        <React.Fragment>
+          <div style={{ height: "1px", width: "1px", display: "block" }}></div>
+          <ButtonGroup>
+            {auth.isSignedIn ? (
+              <Button onClick={onSignOut}>Sign Out</Button>
+            ) : (
+              <React.Fragment>
+                <LandingPageNavButton to="/users/login">
+                  Log In
+                </LandingPageNavButton>
+
+                <Link to="/users/create">
+                  <LandingPageSignUp>Sign Up</LandingPageSignUp>
+                </Link>
+                <Hamburger onClick={() => setOpen(!open)}>
+                  <Burger path={currentPath} />
+                  <Burger path={currentPath} />
+                  <Burger path={currentPath} />
+                </Hamburger>
+              </React.Fragment>
+            )}
+          </ButtonGroup>
+        </React.Fragment>
       )}
     </Nav>
   );

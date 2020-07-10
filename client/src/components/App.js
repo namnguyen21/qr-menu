@@ -12,6 +12,7 @@ import Dashboard from "./users/Dashboard";
 import Landing from "./Landing";
 import RestaurantMenu from "./restaurant/Menu";
 import GlobalStyles from "../GlobalStyle";
+import Footer from "./utility/Footer";
 
 const THEME = {
   colors: {
@@ -20,6 +21,9 @@ const THEME = {
     white: "#FFFFFF",
     black: "#000000",
     grey: "#7D7F7C",
+  },
+  fonts: {
+    logo: "'Lobster', cursive",
   },
 };
 
@@ -45,6 +49,7 @@ export default function App() {
             />
           </Switch>
         </Container>
+        <Footer />
       </Router>
     </ThemeProvider>
   );

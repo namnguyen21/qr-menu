@@ -263,7 +263,11 @@ export default function Card({
               </IconButton>
             </Flex> */}
             <ButtonGroup>
-              <i onClick={onDelete} className="far fa-trash-alt"></i>
+              <i
+                label="delete"
+                onClick={onDelete}
+                className="far fa-trash-alt"
+              ></i>
               <i
                 onClick={() => setEdit(!edit)}
                 className="fas fa-pencil-alt"

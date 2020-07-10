@@ -12,6 +12,11 @@ const GlobalStyle = createGlobalStyle`
         background-color: #f3f7f9
     }
 
+    #root {
+      display: flex;
+      flex-direction: column;
+    }
+
     .box-shadow {
         -webkit-box-shadow: 6px 4px 26px -6px rgba(0, 0, 0, 0.66);
   -moz-box-shadow: 6px 4px 26px -6px rgba(0, 0, 0, 0.66);

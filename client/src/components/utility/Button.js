@@ -11,7 +11,7 @@ const Btn = styled.button`
   outline: none;
   border-radius: ${(props) =>
     props.variant === "filled" || props.variant === "contained"
-      ? "0.5rem"
+      ? "0.2rem"
       : "0"};
   text-align: center;
   cursor: pointer;

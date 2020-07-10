@@ -78,7 +78,8 @@ const Content = styled.div`
   }
 `;
 
-const HeroHeading = styled.h2`
+const HeroHeading = styled.h1`
+  font-family: ${props => props.theme.fonts.logo};
   font-size: 6rem;
   font-weight: 700;
   color: rgba(0, 0, 0, 0.6);
@@ -159,10 +160,10 @@ const CardDescription = styled.div`
 
 const InstructionContainer = styled.div`
   width: 60%;
-  margin: auto;
+  margin: 0 auto 5rem;
   display: grid;
   grid-template-rows: auto auto auto;
-  row-gap: 5rem;
+  row-gap: 3rem;
   @media (max-width: 800px) {
     width: 90%;
   }
@@ -172,7 +173,7 @@ const InstructionHeading = styled.h3`
   font-size: 3.5rem;
   text-align: center;
   color: ${(props) => props.theme.colors.black};
-  margin-bottom: 2rem;
+  margin-bottom: 5rem;
 `;
 
 const InstructionRow = styled.div`
@@ -216,7 +217,7 @@ export default function Landing() {
         <QR src={QrCode} alt="QR Code" />
         <PhoneImg src={Phone} alt="iPhone Image" />
         <Content>
-          <HeroHeading>Menu Board</HeroHeading>
+          <HeroHeading>Meal Time</HeroHeading>
           <HeroSubheading>
             Ditch your old menus and go paperless.
           </HeroSubheading>

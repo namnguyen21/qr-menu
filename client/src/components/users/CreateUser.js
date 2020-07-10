@@ -12,6 +12,9 @@ const Container = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  @media (max-width: 800px) {
+    width: 90%;
+  }
 `;
 
 const Form = styled.form`
@@ -28,6 +31,9 @@ const Section = styled.div`
   display: grid;
   grid-template-columns: 20rem auto;
   margin-bottom: 2rem;
+  @media (max-width: 800px) {
+    grid-template-columns: 15rem auto;
+  }
 `;
 
 const SectionLabel = styled.p`
