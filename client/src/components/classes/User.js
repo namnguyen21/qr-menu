@@ -50,5 +50,9 @@ export default class User {
   editImage = async (itemId, item, newImage) => {
     const imageUrl = await this.postImage(newImage);
     return this.editMenuItem(itemId, { ...item, imageUrl });
+  };
+
+  editUser(userInfo) {
+    return axios.patch(`/users/${this.id}`, userInfo);
   }
 }

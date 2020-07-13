@@ -4,7 +4,6 @@ const bcrypt = require("bcrypt");
 const qr = require("qr-image");
 const db = require("../models");
 
-
 router.post("/create", (req, res) => {
   console.log(req.body);
   db.users
@@ -61,13 +60,30 @@ router.post("/login", (req, res) => {
     });
 });
 
-// router.get("/qr/:id", (req, res) => {
-//   const { id } = req.params;
-//   const qrCode = qr.image(`http://localhost:3000/restaurant/${id}`, {
-//     type: "png",
-//   });
-//   res.type("png");
-//   qrCode.pipe(res);
-// });
+//edit user information
+router.patch("/:id", (req, res) => {
+  const { id } = req.params;
+  db.users
+    .update(req.body, {
+      where: {
+        id: id,
+      },
+      returning: true,
+      plain: true,
+    })
+    .then((response) => {
+      db.users
+        .findOne({
+          where: {
+            id: id,
+          },
+          attributes: ["id", "name", "email", "restaurant", "phone"],
+          raw: true,
+        })
+        .then((user) => {
+          res.json(user);
+        });
+    });
+});
 
 module.exports = router;

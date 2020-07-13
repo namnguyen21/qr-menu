@@ -206,6 +206,7 @@ export default function Dashboard() {
         categories={categories && categories}
         open={open}
         setOpen={setOpen}
+        auth={auth}
       ></CreateModal>
       <Title>{auth.restaurant}</Title>
       <Grid>

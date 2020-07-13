@@ -125,7 +125,7 @@ const Image = styled.img`
 
 Modal.setAppElement("#root");
 
-export default function EditModal({ open, setOpen, categories }) {
+export default function EditModal({ open, setOpen, categories, auth }) {
   const [category, setCategory] = useState("");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -161,7 +161,7 @@ export default function EditModal({ open, setOpen, categories }) {
     }
     setLoading(true);
     //instantiate new user with ID
-    const user = new User("1");
+    const user = new User(auth.id);
     user
       .addMenuItemWithImage({
         category,

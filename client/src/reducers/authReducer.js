@@ -21,6 +21,8 @@ export default (state = INITIAL_STATE, action) => {
       };
     case "SIGN_OUT":
       return { ...INITIAL_STATE };
+    case "EDIT_USER":
+      return { ...state, ...action.payload };
     default:
       return state;
   }
