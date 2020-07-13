@@ -40,13 +40,13 @@ export default function App() {
             <Route path="/users/create" exact component={CreateUser} />
             <Route path="/users/login" exact component={Login} />
             <Route path="/restaurant/:id" exact component={RestaurantMenu} />
-            {/* <Route path="/users/dashboard" exact component={Dashboard} /> */}
-            <ProtectedRoute
+            <Route path="/users/dashboard" exact component={Dashboard} />
+            {/* <ProtectedRoute
               exact
               to="/users/dashboard"
               component={Dashboard}
               auth={auth.isSignedIn}
-            />
+            /> */}
           </Switch>
         </Container>
         <Footer />

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import EditModal from "./EditModal";
+import CreateModal from "./CreateModal";
 import User from "../classes/User";
 import Card from "../utility/Card";
 import Button from "../utility/Button";
@@ -178,7 +178,7 @@ export default function Dashboard() {
   };
 
   //categories for select menu
-  const categories = menu && createCategoriesList(menu);
+  const categories = menu.length > 0 ? createCategoriesList(menu) : null;
 
   useEffect(() => {
     const user = new User(auth.id);
@@ -202,11 +202,11 @@ export default function Dashboard() {
         download="qr"
         href={qr ? qr : null}
       ></a>
-      <EditModal
+      <CreateModal
         categories={categories && categories}
         open={open}
         setOpen={setOpen}
-      ></EditModal>
+      ></CreateModal>
       <Title>{auth.restaurant}</Title>
       <Grid>
         <AccountPanel />

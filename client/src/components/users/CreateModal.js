@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import styled, { keyframes } from "styled-components";
 import { useDispatch } from "react-redux";
 import Modal from "react-modal";
@@ -23,16 +23,16 @@ const Loader = styled.span`
 `;
 
 const StyledModal = styled(Modal)`
-  width: 70rem;
+  width: 40rem;
   position: relative;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border: solid 3px ${(props) => props.theme.colors.primary};
+  border: none;
   background-color: ${(props) => props.theme.colors.white};
   border-radius: 1rem;
   outline: none;
-  padding: 4rem 2rem 2rem;
+  padding: 2rem;
 `;
 
 const IconButton = styled.div`
@@ -67,7 +67,7 @@ const Group = styled.div`
 `;
 
 const Label = styled.label`
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-weight: 700;
 `;
 
@@ -96,6 +96,33 @@ const ErrorMessage = styled.p`
   color: red;
 `;
 
+const ImageContainer = styled.div`
+  height: calc((2 / 3) * 400px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #adbfd9;
+  cursor: pointer;
+  margin-bottom: 1rem;
+`;
+
+const PlaceholderIcon = styled.i`
+  font-size: 5rem;
+  color: ${(props) => props.theme.colors.white};
+`;
+
+const HelperText = styled.p`
+  font-size: 1.6rem;
+  color: ${(props) => props.theme.colors.white};
+`;
+
+const Image = styled.img`
+  height: 100%;
+  width: 100%;
+`;
+
 Modal.setAppElement("#root");
 
 export default function EditModal({ open, setOpen, categories }) {
@@ -107,6 +134,8 @@ export default function EditModal({ open, setOpen, categories }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const imageRef = useRef();
+
   const dispatch = useDispatch();
 
   const onUploadClick = (e) => {
@@ -115,11 +144,21 @@ export default function EditModal({ open, setOpen, categories }) {
   };
 
   const onFileSelection = (e) => {
-    setImage(e.target.files[0]);
+    const file = e.target.files[0];
+    setImage(file);
+
+    const reader = new FileReader();
+    reader.onload = function (event) {
+      imageRef.current.src = event.target.result;
+    };
+    reader.readAsDataURL(file);
   };
 
   const onFormSubmit = (e) => {
     e.preventDefault();
+    if (!category.trim() || !name.trim() || !price.trim()) {
+      return setError("All fields with * must be filled.");
+    }
     setLoading(true);
     //instantiate new user with ID
     const user = new User("1");
@@ -155,11 +194,25 @@ export default function EditModal({ open, setOpen, categories }) {
       }}
       isOpen={open}
     >
-      <IconButton onClick={() => setOpen(!open)}>
-        <i className="fas fa-times"></i>
-      </IconButton>
+      <input
+        style={{ display: "none" }}
+        className="file-input"
+        type="file"
+        onChange={onFileSelection}
+        name="file"
+        accept=".jpg,.png"
+      />
+      <ImageContainer onClick={onUploadClick}>
+        {!image ? (
+          <React.Fragment>
+            <PlaceholderIcon className="far fa-image"></PlaceholderIcon>
+            <HelperText>Click to add an image</HelperText>
+          </React.Fragment>
+        ) : (
+          <Image ref={imageRef} />
+        )}
+      </ImageContainer>
       <Form onSubmit={onFormSubmit}>
-        {/* <Form method="post" action="/menu/images"> */}
         <div
           style={{
             display: "grid",
@@ -179,17 +232,25 @@ export default function EditModal({ open, setOpen, categories }) {
               <Option value="" selected disabled hidden></Option>
             </Select>
           </div>
-          <strong style={{ fontSize: "2rem" }}>OR</strong>
+          <strong style={{ fontSize: "2rem" }}>OR*</strong>
           <div>
             <Label>Create New Category</Label>
             <Input onChange={(e) => setCategory(e.target.value)} type="text" />
           </div>
         </div>
         <Group>
-          <Label>Name of Dish</Label>
+          <Label>Name of Dish *</Label>
           <Input
             value={name}
             onChange={(e) => setName(e.target.value)}
+            type="text"
+          />
+        </Group>
+        <Group>
+          <Label>Price *</Label>
+          <Input
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
             type="text"
           />
         </Group>
@@ -201,50 +262,15 @@ export default function EditModal({ open, setOpen, categories }) {
             type="text"
           />
         </Group>
-        <Group>
-          <Label>Price</Label>
-          <Input
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
-            type="text"
-          />
-        </Group>
         <Group>{error ? <ErrorMessage>{error}</ErrorMessage> : null}</Group>
         <Group style={{ display: "flex", justifyContent: "space-between" }}>
           <Button onClick={() => setOpen(!open)}>Cancel</Button>
-          <div
-            style={{
-              display: "flex",
-              alignContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Button
-              style={{ backgroundColor: image ? "#000000" : null }}
-              onClick={onUploadClick}
-              variant="filled"
-            >
-              <i
-                style={{ fontSize: "2rem", marginRight: "0.5rem" }}
-                className="fas fa-upload"
-              ></i>
-              Upload Image
-            </Button>
-            <input
-              style={{ display: "none" }}
-              className="file-input"
-              type="file"
-              onChange={onFileSelection}
-              name="file"
-              accept=".jpg,.png"
-            />
-            <Button variant="filled">Submit</Button>
-            {loading ? (
-              <Loader />
-            ) : (
-              <div style={{ display: "inline-block", width: "3.6rem" }}></div>
-            )}
-          </div>
+          {loading ? (
+            <Loader />
+          ) : (
+            <div style={{ display: "inline-block", width: "3.6rem" }}></div>
+          )}
+          <Button variant="filled">Submit</Button>
         </Group>
       </Form>
     </StyledModal>

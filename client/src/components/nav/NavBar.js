@@ -17,15 +17,8 @@ const Nav = styled.nav`
 
 const Logo = styled.h1`
   font-size: 3rem;
-  background: rgb(241, 12, 69);
   font-family: ${(props) => props.theme.fonts.logo};
-  background: linear-gradient(
-    45deg,
-    rgba(241, 12, 69, 1) 15%,
-    rgba(255, 241, 0, 1) 96%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: ${(props) => props.theme.colors.black};
 `;
 
 const ButtonGroup = styled.div`
@@ -212,7 +205,7 @@ export default function NavBar() {
       {currentPath !== "landing" ? (
         <React.Fragment>
           <Link style={{ textDecoration: "none" }} to="/">
-            <Logo>Meal Time</Logo>
+            <Logo>Minute Menu</Logo>
           </Link>
 
           <ButtonGroup>

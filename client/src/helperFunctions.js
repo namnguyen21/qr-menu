@@ -25,6 +25,7 @@ export const createCategoriesList = (allMenuObjects) => {
   }
 
   const noDuplicates = Object.keys(map);
+  console.log(noDuplicates)
 
   return noDuplicates.map((item) => item[0].toUpperCase() + item.substr(1));
 };
