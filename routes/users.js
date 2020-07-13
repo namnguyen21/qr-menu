@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
-const qr = require("qr-image");
 const db = require("../models");
 
 router.post("/create", (req, res) => {

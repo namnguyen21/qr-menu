@@ -1,5 +1,6 @@
 const express = require("express");
 const db = require("./models");
+const path = require("path");
 require("dotenv").config();
 
 // db connection
@@ -10,7 +11,7 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-//app.use(express.static(path.join(__dirname, "client/build")));
+app.use(express.static(path.join(__dirname, "client/build")));
 
 app.use("/users", require("./routes/users"));
 app.use("/menu", require("./routes/menu"));
@@ -21,3 +22,7 @@ db.sequelize.sync({ force: false }).then(function () {
     console.log("App listening on PORT " + PORT);
   });
 });
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, './client/build/index.html'))
+})

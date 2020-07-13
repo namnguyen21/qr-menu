@@ -1,5 +1,4 @@
 const express = require("express");
-const qr = require("qr-image");
 const qrcode = require("qrcode");
 const db = require("../models");
 
