@@ -4,7 +4,6 @@ import styled from "styled-components";
 import Restaurant from "../classes/Restaurant";
 import Card from "./Card";
 import {
-  createCategoriesList,
   separateCategories,
 } from "../../helperFunctions";
 
@@ -49,14 +48,12 @@ const CategoryName = styled.h4`
 export default function Menu(props) {
   //get id of restaurant from url
   const { id: restaurantId } = props.match.params;
-  const [selectValue, setSelectValue] = useState("");
-  const [sorted, setSorted] = useState(false);
 
   const dispatch = useDispatch();
 
   //restaurant info
   const currentRestaurant = useSelector((state) => state.restaurant);
-  const { name, menu, display } = currentRestaurant;
+  const { name, menu } = currentRestaurant;
   // console.log(separateCategories(menu));
 
   // const categories = menu && createCategoriesList(menu);

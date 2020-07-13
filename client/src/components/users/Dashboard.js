@@ -201,6 +201,7 @@ export default function Dashboard() {
         style={{ display: "none" }}
         download="qr"
         href={qr ? qr : null}
+        alt="Invisible download button"
       ></a>
       <CreateModal
         categories={categories && categories}

@@ -35,27 +35,6 @@ const StyledModal = styled(Modal)`
   padding: 2rem;
 `;
 
-const IconButton = styled.div`
-  height: 3rem;
-  width: 3rem;
-  font-size: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  border: solid 1px ${(props) => props.theme.colors.primary};
-  background-color: ${(props) => props.theme.colors.primary};
-  color: ${(props) => props.theme.colors.white};
-  border-radius: 50%;
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  text-align: center;
-  cursor: pointer;
-  i {
-    font-size: 2rem;
-  }
-`;
 
 const Form = styled.form`
   height: 100%;
