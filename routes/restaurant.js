@@ -48,6 +48,11 @@ router.get("/qr/:id", (req, res) => {
 
 router.get("/pdf/:id", (req, res) => {
   const { id } = req.params;
+  const pdfOptions = {
+    height: "500px",
+    width: "500px",
+  };
+
   db.users
     .findOne({
       where: {
@@ -62,7 +67,7 @@ router.get("/pdf/:id", (req, res) => {
         `https://${req.headers.host}/restaurant/${id}`,
         function (err, url) {
           // write pdf using restaurant name and qr code
-          pdf.create(template(restaurant, url)).toStream((err, pdfStream) => {
+          pdf.create(template(restaurant, url), pdfOptions).toStream((err, pdfStream) => {
             if (err) {
               return res.sendStatus(500);
             } else {
