@@ -9,6 +9,7 @@ const Nav = styled.nav`
   padding: 1rem 5rem;
   display: flex;
   justify-content: space-between;
+  position: relative;
   min-height: 5rem;
   @media (max-width: 800px) {
     padding: 2rem;
@@ -85,29 +86,24 @@ const Burger = styled.span`
 
 const Menu = styled.div`
   background-color: ${(props) => props.theme.colors.white};
-  height: 100vh;
+  /* width: 90vw; */
+  height: ${(props) => (props.open ? "35rem" : "0px")};
   position: absolute;
-  top: 0;
-  right: 0;
-  width: ${(props) => (props.open ? "35rem" : "0px")};
+  top: 2rem;
+  left: ${(props) => (props.open ? "1rem" : "100%")};
+  right: 1rem;
+  /* transform: translateX(-50%); */
+  /* width: ${(props) => (props.open ? "35rem" : "0px")}; */
   transition: all 0.3s;
   z-index: 9999;
   display: ${(props) => (props.open ? "flex" : null)};
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  &:before {
-    content: "";
-    width: calc(100vw - 35rem);
-    height: 100vh;
-    position: absolute;
-    display: ${(props) => (!props.open ? "none" : null)};
-    top: 0;
-    left: 0;
-    transform: ${(props) => (props.open ? "translateX(-100%)" : null)};
-    z-index: 1;
-    background-color: rgba(0, 0, 0, 0.6);
-  }
+  border-radius: 1rem;
+  -webkit-box-shadow: 0px 10px 114px -10px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 10px 114px -10px rgba(0,0,0,0.75);
+box-shadow: 0px 10px 114px -10px rgba(0,0,0,0.75);
 `;
 
 const StyledLink = styled(Link)`
@@ -119,15 +115,16 @@ const StyledLink = styled(Link)`
 
 const Exit = styled.span`
   font-size: 3rem;
-  color: ${(props) => props.theme.colors.black};
+  color: ${(props) => props.theme.colors.primary};
   position: absolute;
-  top: 2rem;
+  top: 1rem;
   right: 2rem;
   z-index: 9999999;
   display: ${(props) => (props.open ? "inline-block" : "none")};
+
   cursor: pointer;
   i {
-    color: ${(props) => props.theme.colors.black};
+    color: ${(props) => props.theme.colors.primary};
     font-size: 3rem;
   }
 `;
@@ -146,20 +143,20 @@ const RespNavLink = styled(Link)`
   &:not(:last-child) {
     margin-bottom: 5rem;
   }
-  background: rgb(241, 12, 69);
-  background: linear-gradient(
-    45deg,
-    rgba(241, 12, 69, 1) 15%,
-    rgba(255, 241, 0, 1) 96%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  transition: background 1s;
+  color: ${(props) => props.theme.colors.primary};
 `;
 
 const RespSignUpButton = styled(Link)`
   @media (max-width: 800px) {
     margin-right: 2rem;
+  }
+`;
+
+const HomeSignOutButton = styled(Button)`
+  color: ${(props) => props.theme.colors.white};
+  &:hover {
+    color: ${(props) => props.theme.colors.white};
+    border-bottom: solid 1px ${(props) => props.theme.colors.white};
   }
 `;
 
@@ -205,7 +202,7 @@ export default function NavBar() {
       {currentPath !== "landing" ? (
         <React.Fragment>
           <Link style={{ textDecoration: "none" }} to="/">
-            <Logo>Minute Menu</Logo>
+            <Logo>Menu Spot</Logo>
           </Link>
 
           <ButtonGroup>
@@ -235,7 +232,9 @@ export default function NavBar() {
           <div style={{ height: "1px", width: "1px", display: "block" }}></div>
           <ButtonGroup>
             {auth.isSignedIn ? (
-              <Button onClick={onSignOut}>Sign Out</Button>
+              <HomeSignOutButton onClick={onSignOut}>
+                Sign Out
+              </HomeSignOutButton>
             ) : (
               <React.Fragment>
                 <LandingPageNavButton to="/users/login">

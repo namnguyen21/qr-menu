@@ -45,6 +45,7 @@ const EditIcon = styled.i`
 const Flex = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-top: 1rem;
 `;
 
 export default function AccountPanel() {

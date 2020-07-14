@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import QrCode from "../images/qr.svg";
 import Phone from "../images/iphone.png";
@@ -45,6 +46,7 @@ const Hero = styled.div`
   @media (max-width: 800px) {
     display: block;
     padding: 0 2rem;
+    height: 70vh;
   }
 `;
 
@@ -79,7 +81,7 @@ const Content = styled.div`
 `;
 
 const HeroHeading = styled.h1`
-  font-family: ${props => props.theme.fonts.logo};
+  font-family: ${(props) => props.theme.fonts.logo};
   font-size: 6rem;
   font-weight: 700;
   color: rgba(0, 0, 0, 0.6);
@@ -198,6 +200,13 @@ const InstructionIcon = styled.img`
 const StyledButton = styled(Button)`
   font-size: 2.5rem;
   border: none;
+  background-color: ${(props) => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.white};
+  border-radius: 4rem;
+  padding: 1rem 2rem;
+  &:hover {
+    background-color: ${(props) => props.theme.colors.white};
+  }
 `;
 
 export default function Landing() {
@@ -217,7 +226,7 @@ export default function Landing() {
         <QR src={QrCode} alt="QR Code" />
         <PhoneImg src={Phone} alt="iPhone Image" />
         <Content>
-          <HeroHeading>Minute Menu</HeroHeading>
+          <HeroHeading>Menu Spot</HeroHeading>
           <HeroSubheading>
             Ditch your old menus and go paperless.
           </HeroSubheading>
@@ -226,13 +235,9 @@ export default function Landing() {
             Eliminate one of those problems by going digital with your menu.
           </HeroDescription>
           <div style={{ display: "flex", justifyContent: "center" }}>
-            <StyledButton
-              style={{ fontSize: "3rem" }}
-              variant="filled"
-              color="white"
-            >
-              Get Started
-            </StyledButton>
+            <Link to="/users/create">
+              <StyledButton variant="filled">Get Started</StyledButton>
+            </Link>
           </div>
         </Content>
       </Hero>

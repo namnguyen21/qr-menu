@@ -1,6 +1,8 @@
 const express = require("express");
 const qrcode = require("qrcode");
+const pdf = require("html-pdf");
 const db = require("../models");
+const template = require("../pdf/template");
 
 const router = express.Router();
 
@@ -36,12 +38,51 @@ router.get("/menu/:id", (req, res) => {
 
 router.get("/qr/:id", (req, res) => {
   const { id } = req.params;
-  qrcode.toDataURL(`https://localhost:3000/restaurant/${id}`, function (
+  qrcode.toDataURL(`https://${req.headers.host}/restaurant/${id}`, function (
     err,
     url
   ) {
     res.json(url);
   });
+});
+
+router.get("/pdf/:id", (req, res) => {
+  const { id } = req.params;
+  db.users
+    .findOne({
+      where: {
+        id: id,
+      },
+      attributes: ["restaurant"],
+      raw: true,
+    })
+    .then((response) => {
+      const { restaurant } = response;
+      qrcode.toDataURL(
+        `https://${req.headers.host}/restaurant/${id}`,
+        function (err, url) {
+          // write pdf using restaurant name and qr code
+          pdf.create(template(restaurant, url)).toStream((err, pdfStream) => {
+            if (err) {
+              // handle error and return a error response code
+              console.log(err);
+              return res.sendStatus(500);
+            } else {
+              // send a status code of 200 OK
+              res.statusCode = 200;
+
+              pdfStream.on("end", () => {
+                // done reading
+                return res.end();
+              });
+
+              // pipe the contents of the PDF directly to the response
+              pdfStream.pipe(res);
+            }
+          });
+        }
+      );
+    });
 });
 
 module.exports = router;

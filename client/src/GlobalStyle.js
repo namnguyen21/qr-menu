@@ -6,6 +6,7 @@ const GlobalStyle = createGlobalStyle`
       margin: 0;
       font-size: 10px;
       font-family: "Lato", sans-serif;
+     
       box-sizing: border-box;
     }
     body {

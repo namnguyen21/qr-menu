@@ -1,9 +1,12 @@
 const Sequelize = require("sequelize");
 
-const sequelize = new Sequelize("qrmenu", "root", "Cool6024dn", {
-  host: "127.0.0.1",
+const sequelize = new Sequelize("minutemenu", "admin", "Cool6024dn", {
   dialect: "mysql",
-  operatorsAliases: false,
+  host: "minute-menu.c37nlnmyaqvp.us-west-1.rds.amazonaws.com",
+  port: 3306,
+  dialectOptions: {
+    ssl: "Amazon RDS",
+  },
 });
 
 module.exports = sequelize;

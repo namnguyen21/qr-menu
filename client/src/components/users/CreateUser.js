@@ -22,9 +22,9 @@ const Form = styled.form`
   background-color: ${(props) => props.theme.colors.white};
   padding: 5rem 3rem;
   border-radius: 1rem;
-  /* -webkit-box-shadow: 6px 4px 26px -6px rgba(0, 0, 0, 0.66);
-  -moz-box-shadow: 6px 4px 26px -6px rgba(0, 0, 0, 0.66);
-  box-shadow: 6px 4px 26px -6px rgba(0, 0, 0, 0.66); */
+  @media (max-width: 800px) {
+    padding: 2rem 1rem;
+  }
 `;
 
 const Section = styled.div`
@@ -32,7 +32,7 @@ const Section = styled.div`
   grid-template-columns: 20rem auto;
   margin-bottom: 2rem;
   @media (max-width: 800px) {
-    grid-template-columns: 15rem auto;
+    grid-template-columns: 10rem auto;
   }
 `;
 
@@ -40,6 +40,9 @@ const SectionLabel = styled.p`
   padding: 1rem;
   font-size: 2rem;
   color: ${(props) => props.theme.colors.grey};
+  @media (max-width: 800px) {
+    font-size: 1.6rem;
+  }
 `;
 
 const InputSection = styled.div`
@@ -91,15 +94,18 @@ export default function CreateUser() {
   const [redirect, setRedirect] = useState(false);
 
   const onSubmit = (e) => {
-    //regex email validation
+    //regex email and phone validation
     const emailPattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+    const phonePattern = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}/;
     e.preventDefault();
     setError("");
     // form validation
     if (!name || !email || !restaurant || !phone || !password || !password) {
-      setError("Please enter all fields.");
+      setError("Please enter all fields");
     } else if (!emailPattern.test(email)) {
       setError("Please enter a valid email");
+    } else if (!phonePattern.test(phone)) {
+      setError("Please enter a valid phone number");
     } else if (password !== rePassword) {
       setError("Passwords must match");
     } else {

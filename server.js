@@ -23,6 +23,6 @@ db.sequelize.sync({ force: false }).then(function () {
   });
 });
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, './client/build/index.html'))
-})
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, './client/build/index.html'))
+// })

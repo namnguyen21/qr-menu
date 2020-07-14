@@ -55,4 +55,13 @@ export default class User {
   editUser(userInfo) {
     return axios.patch(`/users/${this.id}`, userInfo);
   }
+
+  getPdf() {
+    return axios.get(`/restaurant/pdf/${this.id}`, {
+      responseType: "arraybuffer",
+      headers: {
+        Accept: 'application/pdf',
+    },
+    });
+  }
 }
