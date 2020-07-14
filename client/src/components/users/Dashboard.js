@@ -82,8 +82,9 @@ const CardContainer = styled.div`
 
 const Label = styled.span`
   font-size: 2rem;
+  margin-right: 1rem;
   @media (max-width: 800px) {
-    font-size: 1.6rem;
+    font-size: 2rem;
   }
 `;
 

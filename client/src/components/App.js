@@ -23,7 +23,7 @@ const THEME = {
     grey: "#525252",
   },
   fonts: {
-    logo: "'Lobster', cursive",
+    logo: "'Galada', cursive",
   },
 };
 

@@ -202,7 +202,7 @@ export default function NavBar() {
       {currentPath !== "landing" ? (
         <React.Fragment>
           <Link style={{ textDecoration: "none" }} to="/">
-            <Logo>Menu Spot</Logo>
+            <Logo>Tiny Menu</Logo>
           </Link>
 
           <ButtonGroup>

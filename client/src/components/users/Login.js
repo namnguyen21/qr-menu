@@ -33,6 +33,9 @@ const Image = styled.img`
   text-align: center;
   transform: translateY(4px);
   z-index: -10;
+  @media(max-width: 800px) {
+    width: 100vw;
+  }
 `;
 
 const Form = styled.form`
@@ -40,6 +43,9 @@ const Form = styled.form`
   padding: 5rem 1rem;
   background-color: ${(props) => props.theme.colors.white};
   border-radius: 1rem;
+  @media(max-width: 800px) {
+    width: 100vw;
+  }
 `;
 
 const Group = styled.div`

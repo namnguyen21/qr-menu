@@ -86,6 +86,7 @@ const HeroHeading = styled.h1`
   font-weight: 700;
   color: rgba(0, 0, 0, 0.6);
   letter-spacing: 3px;
+  line-height: 1;
   margin-bottom: 2rem;
   @media (max-width: 800px) {
     font-size: 5rem;
@@ -226,7 +227,7 @@ export default function Landing() {
         <QR src={QrCode} alt="QR Code" />
         <PhoneImg src={Phone} alt="iPhone Image" />
         <Content>
-          <HeroHeading>Menu Spot</HeroHeading>
+          <HeroHeading>Tiny Menu</HeroHeading>
           <HeroSubheading>
             Ditch your old menus and go paperless.
           </HeroSubheading>
