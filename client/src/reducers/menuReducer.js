@@ -23,7 +23,6 @@ export default (state = INITIAL_STATE, action) => {
     case "CLEAR_SORTED":
       return { ...state, display: [...state.items] };
     case "EDIT_ITEM":
-      console.log("hitting");
       const filteredItems = state.items.filter(
         (item) => item.id !== action.payload.id
       );

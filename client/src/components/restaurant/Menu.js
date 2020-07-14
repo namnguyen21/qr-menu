@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import Restaurant from "../classes/Restaurant";
@@ -54,9 +54,6 @@ export default function Menu(props) {
   //restaurant info
   const currentRestaurant = useSelector((state) => state.restaurant);
   const { name, menu } = currentRestaurant;
-  // console.log(separateCategories(menu));
-
-  // const categories = menu && createCategoriesList(menu);
 
   useEffect(() => {
     const restaurant = new Restaurant(restaurantId);
@@ -68,7 +65,6 @@ export default function Menu(props) {
 
     restaurant.getMenu().then((response) => {
       if (response.data) {
-        console.log(response.data);
         const separatedMenu = separateCategories(response.data.menu);
         dispatch({
           type: "FETCH_RESTAURANT_MENU",

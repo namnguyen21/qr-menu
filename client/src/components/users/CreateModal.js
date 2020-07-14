@@ -152,7 +152,6 @@ export default function EditModal({ open, setOpen, categories, auth }) {
       .then((response) => {
         if (response.status === 200) {
           setLoading(false);
-          console.log(response);
           setName("");
           setCategory("");
           setDescription("");

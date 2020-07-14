@@ -5,7 +5,6 @@ import { saveAs } from "file-saver";
 import CreateModal from "./CreateModal";
 import User from "../classes/User";
 import Card from "../utility/Card";
-import Button from "../utility/Button";
 import { createCategoriesList } from "../../helperFunctions";
 import AccountPanel from "./AccountPanel";
 import Restaurant from "../classes/Restaurant";
@@ -240,7 +239,6 @@ export default function Dashboard() {
   const onPdfClick = () => {
     const newUser = new User(auth.id);
     newUser.getPdf().then((response) => {
-      console.log(response);
       const blob = new Blob([response.data], { type: "application/pdf" });
       saveAs(blob, "qr.pdf");
     });

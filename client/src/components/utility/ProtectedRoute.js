@@ -6,7 +6,6 @@ export default function ProtectedRoute({
   auth,
   ...rest
 }) {
-  console.log(auth);
   return auth ? (
     <Route {...rest} render={(props) => <Component {...props} />} />
   ) : (

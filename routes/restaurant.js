@@ -64,8 +64,6 @@ router.get("/pdf/:id", (req, res) => {
           // write pdf using restaurant name and qr code
           pdf.create(template(restaurant, url)).toStream((err, pdfStream) => {
             if (err) {
-              // handle error and return a error response code
-              console.log(err);
               return res.sendStatus(500);
             } else {
               // send a status code of 200 OK

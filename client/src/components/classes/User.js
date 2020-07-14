@@ -24,7 +24,6 @@ export default class User {
   addMenuItemWithImage = async (item) => {
     // get image file from menu item
     const { file, category, name, description, price } = item;
-    console.log(file);
     if (file) {
       var imageUrl = await this.postImage(file);
     }

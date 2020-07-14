@@ -25,7 +25,6 @@ router.post("/", (req, res) => {
 });
 
 router.patch("/edit/:id", (req, res) => {
-  console.log(req.body);
   const { id: itemId } = req.params;
   db.menuItems
     .update(req.body, {

@@ -4,7 +4,6 @@ const bcrypt = require("bcrypt");
 const db = require("../models");
 
 router.post("/create", (req, res) => {
-  console.log(req.body);
   db.users
     .findOne({
       where: {
@@ -44,7 +43,6 @@ router.post("/login", (req, res) => {
       } else {
         const { dataValues: data } = response;
         if (await bcrypt.compare(password, data.password)) {
-          console.log(data);
           res.json({
             id: data.id,
             name: data.name,
