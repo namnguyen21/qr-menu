@@ -101,10 +101,13 @@ module.exports = (restaurantName, qr) => {
                   alt="" class="qr">
               <ul>
                   <li>
-                      1. Scan QR Code on your phone.
+                      1. Open the camera app on your phone.
                   </li>
                   <li>
-                      2. Browse the menu!
+                      2. Scan QR Code.
+                  </li>
+                  <li>
+                      3. Browse the menu!
                   </li>
               </ul>
               <div class="footer">

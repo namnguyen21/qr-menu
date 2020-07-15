@@ -293,7 +293,9 @@ export default function Dashboard() {
           </ResponsiveBtn>
           <ResponsiveBtn onClick={onPdfClick}>
             <i className="far fa-file-pdf"></i>
-            <p>Download Displayable PDF</p>
+            <p>
+              Download Displayable PDF
+            </p>
           </ResponsiveBtn>
         </Nav>
         <Panel>

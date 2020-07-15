@@ -1,14 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import LazyLoad from "react-lazyload";
 
 const CardWrapper = styled.div`
   @media (min-width: 800px) {
     width: 25rem;
     margin: 2rem;
   }
-  /* @media (min-width: 800px) and (max-width: 1000px) {
-    width: 45%;
-  } */
   @media (max-width: 800px) {
     width: 80%;
     margin: 2rem auto;
@@ -54,11 +52,17 @@ const Price = styled.p`
   margin-bottom: 0.5rem;
 `;
 
+const StyledLazy = styled(LazyLoad)`
+  width: 100%;
+`;
+
 export default function Card({ name, description, price, imageUrl }) {
   return (
     <CardWrapper>
       {imageUrl ? (
-        <CardImage src={imageUrl ? imageUrl : null} alt={name} />
+        <StyledLazy>
+          <CardImage src={imageUrl ? imageUrl : null} alt={name} />
+        </StyledLazy>
       ) : null}
 
       <CardContent>

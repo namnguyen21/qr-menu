@@ -9,6 +9,7 @@ const Nav = styled.nav`
   padding: 1rem 5rem;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   position: relative;
   min-height: 5rem;
   @media (max-width: 800px) {
@@ -20,6 +21,8 @@ const Logo = styled.h1`
   font-size: 3rem;
   font-family: ${(props) => props.theme.fonts.logo};
   color: ${(props) => props.theme.colors.black};
+  line-height: 1;
+  vertical-align: middle;
 `;
 
 const ButtonGroup = styled.div`

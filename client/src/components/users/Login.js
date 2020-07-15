@@ -34,7 +34,7 @@ const Image = styled.img`
   transform: translateY(4px);
   z-index: -10;
   @media(max-width: 800px) {
-    width: 100vw;
+    width: 29rem;
   }
 `;
 
@@ -44,7 +44,7 @@ const Form = styled.form`
   background-color: ${(props) => props.theme.colors.white};
   border-radius: 1rem;
   @media(max-width: 800px) {
-    width: 100vw;
+    width: 30rem;
   }
 `;
 

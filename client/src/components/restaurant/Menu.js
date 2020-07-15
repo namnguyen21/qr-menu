@@ -14,8 +14,8 @@ const Container = styled.div`
 
 const Heading = styled.h2`
   font-size: 4rem;
-  text-align: left;
-  display: inline-block;
+  text-align: center;
+  /* display: inline-block; */
   margin-left: 2rem;
   color: ${(props) => props.theme.colors.grey};
   font-weight: 700;

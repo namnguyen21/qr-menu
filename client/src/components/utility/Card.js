@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
+import LazyLoad from "react-lazyload";
 import Button from "./Button";
 import User from "../classes/User";
 import Placeholder from "../../images/food-placeholder.png";
@@ -99,6 +100,10 @@ const ButtonGroup = styled.div`
   }
 `;
 
+const StyledLazyLoad = styled(LazyLoad)`
+  width: 100%;
+`;
+
 export default function Card({
   id,
   imageUrl,
@@ -184,7 +189,9 @@ export default function Card({
   return (
     <CardWrapper className="box-shadow">
       <CardImageWrapper>
-        <CardImage alt={name} src={imageUrl ? imageUrl : Placeholder} />
+        <StyledLazyLoad>
+          <CardImage alt={name} src={imageUrl ? imageUrl : Placeholder} />
+        </StyledLazyLoad>
         <ChangeImageButton
           onClick={onEditImageClick}
           className="fas fa-photo-video"
