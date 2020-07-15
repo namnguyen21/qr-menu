@@ -227,7 +227,7 @@ export default function Landing() {
         <QR src={QrCode} alt="QR Code" />
         <PhoneImg src={Phone} alt="iPhone Image" />
         <Content>
-          <HeroHeading>Tiny Menu</HeroHeading>
+          <HeroHeading>Snap Menu</HeroHeading>
           <HeroSubheading>
             Ditch your old menus and go paperless.
           </HeroSubheading>
