@@ -16,11 +16,11 @@ const Container = styled.div`
   height: 100%;
   width: 100vw;
   display: block;
-  padding-bottom: 5rem;
+  /* padding-bottom: 5rem; */
 `;
 
 const BackgroundDiv = styled.div`
-  height: 90vh;
+  height: calc(80vh + 7.4rem);
   width: 100vw;
   position: absolute;
   top: -1%;
@@ -39,9 +39,13 @@ const Hero = styled.div`
   width: 100vw;
   /* background-color: ${(props) => props.theme.colors.primary}; */
   position: relative;
-  @media (min-width: 800px) {
+  @media (min-width: 1000px) {
     display: grid;
     grid-template-columns: 20% 25% 50%;
+  }
+  @media(min-width: 800px) and (max-width: 1000px){
+    display: grid;
+    grid-template-columns: 40% 60%;
   }
   @media (max-width: 800px) {
     display: block;
@@ -58,7 +62,7 @@ const QR = styled.img`
   left: 15rem; */
   margin-left: auto;
   margin-top: 80%;
-  @media (max-width: 800px) {
+  @media (max-width: 1000px) {
     display: none;
   }
 `;
@@ -77,6 +81,15 @@ const PhoneImg = styled.img`
 const Content = styled.div`
   @media (min-width: 800px) {
     margin-top: 5rem;
+  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 75%;
+  > * {
+    &:not(:last-child) {
+      margin-bottom: 2rem;
+    }
   }
 `;
 
@@ -167,14 +180,14 @@ const InstructionGrid = styled.div`
   margin: auto;
   justify-content: space-evenly;
   align-items: middle;
-  margin-bottom: 5rem;
+  margin-bottom: 10rem;
   flex-wrap: wrap;
 `;
 
 const DemoGif = styled.img`
-  width: 60rem;
+  width: 50rem;
   border-radius: 1rem;
-  @media(max-width: 900px) {
+  @media (max-width: 900px) {
     width: 100%;
     margin: auto;
     text-align: center;
@@ -183,8 +196,8 @@ const DemoGif = styled.img`
 `;
 const StyledLazyLoad = styled(LazyLoad)`
   width: 60rem;
-  order: 1; 
-  @media(max-width: 900px) {
+  order: 1;
+  @media (max-width: 900px) {
     order: 0;
     width: 90%;
     display: flex;
@@ -192,20 +205,20 @@ const StyledLazyLoad = styled(LazyLoad)`
   }
 `;
 
-
 const InstructionDiv = styled.ol`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   width: 30rem;
   order: 0;
-  @media(max-width: 900px) {
+  @media (max-width: 900px) {
     order: 1;
   }
 `;
 
 const InstructionText = styled.li`
-  font-size: 3rem;
+  font-size: 2.5rem;
+  font-weight: 400;
   color: ${(props) => props.theme.colors.grey};
   &:not(:last-child) {
     margin-bottom: 2rem;
@@ -245,8 +258,7 @@ export default function Landing() {
             Ditch your old menus and go paperless.
           </HeroSubheading>
           <HeroDescription>
-            COVID-19 has created many problems for the restaurant industry.
-            Eliminate one of those problems by going digital with your menu.
+            Sign up today and instantly digitize your menu.
           </HeroDescription>
           <div style={{ display: "flex", justifyContent: "center" }}>
             <Link to="/users/create">
@@ -259,7 +271,9 @@ export default function Landing() {
         <InstructionDiv>
           <InstructionText>Create an account and log in</InstructionText>
           <InstructionText>Add items to your menu</InstructionText>
-          <InstructionText>Download and print a QR code to display within your restaurant</InstructionText>
+          <InstructionText>
+            Download and print a QR code to display within your restaurant
+          </InstructionText>
         </InstructionDiv>
         <StyledLazyLoad>
           <DemoGif className="box-shadow" src={Demo} alt="Login image" />

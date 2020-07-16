@@ -13,7 +13,7 @@ const Nav = styled.nav`
   position: relative;
   min-height: 5rem;
   @media (max-width: 800px) {
-    padding: 2rem;
+    padding: 1rem 2rem 1rem 0;
   }
 `;
 
@@ -93,7 +93,7 @@ const Menu = styled.div`
   /* width: 90vw; */
   height: ${(props) => (props.open ? "35rem" : "0px")};
   position: absolute;
-  top: 2rem;
+  top: 1rem;
   left: ${(props) => (props.open ? "1rem" : "100%")};
   right: 1rem;
   /* transform: translateX(-50%); */
@@ -119,7 +119,7 @@ const StyledLink = styled(Link)`
 
 const Exit = styled.span`
   font-size: 3rem;
-  color: ${(props) => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.black};
   position: absolute;
   top: 1rem;
   right: 2rem;
@@ -128,7 +128,7 @@ const Exit = styled.span`
 
   cursor: pointer;
   i {
-    color: ${(props) => props.theme.colors.primary};
+    color: ${(props) => props.theme.colors.black};
     font-size: 3rem;
   }
 `;
