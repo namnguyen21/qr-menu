@@ -9,8 +9,8 @@ import Background from "../images/gradient-background.svg";
 import Soap from "../images/hand-sanitizer.svg";
 import Pencil from "../images/pencil.svg";
 import Clock from "../images/clock.svg";
-import User from "../images/user.svg";
-import Form from "../images/form.svg";
+import Demo from "../images/demo.gif";
+import LazyLoad from "react-lazyload";
 
 const Container = styled.div`
   height: 100%;
@@ -161,55 +161,68 @@ const CardDescription = styled.div`
   text-align: center;
 `;
 
-const InstructionContainer = styled.div`
-  width: 60%;
-  margin: 0 auto 5rem;
-  display: grid;
-  grid-template-rows: auto auto auto;
-  row-gap: 3rem;
-  @media (max-width: 800px) {
+const InstructionGrid = styled.div`
+  width: 100%;
+  display: flex;
+  margin: auto;
+  justify-content: space-evenly;
+  align-items: middle;
+  margin-bottom: 5rem;
+  flex-wrap: wrap;
+`;
+
+const DemoGif = styled.img`
+  width: 60rem;
+  border-radius: 1rem;
+  @media(max-width: 900px) {
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+`;
+const StyledLazyLoad = styled(LazyLoad)`
+  width: 60rem;
+  order: 1; 
+  @media(max-width: 900px) {
+    order: 0;
     width: 90%;
+    display: flex;
+    justify-content: center;
   }
 `;
 
-const InstructionHeading = styled.h3`
-  font-size: 3.5rem;
-  text-align: center;
-  color: ${(props) => props.theme.colors.black};
-  margin-bottom: 5rem;
-`;
 
-const InstructionRow = styled.div`
-  display: grid;
-  grid-template-columns: 30% 70%;
-  align-items: flex-start;
-`;
-
-const InstructionColumn = styled.div`
-  height: 100%;
+const InstructionDiv = styled.ol`
   display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 2.5rem;
-  color: ${(props) => props.theme.colors.grey};
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 30rem;
+  order: 0;
+  @media(max-width: 900px) {
+    order: 1;
+  }
 `;
 
-const InstructionIcon = styled.img`
-  height: 5rem;
+const InstructionText = styled.li`
+  font-size: 3rem;
+  color: ${(props) => props.theme.colors.grey};
+  &:not(:last-child) {
+    margin-bottom: 2rem;
+  }
 `;
 
 const StyledButton = styled(Button)`
   font-size: 2.5rem;
   border: none;
-  background-color: ${(props) => props.theme.colors.primary};
+  background-color: ${(props) => props.theme.colors.black};
   color: ${(props) => props.theme.colors.white};
   border-radius: 4rem;
   padding: 1rem 2rem;
   &:hover {
-    background-color: ${(props) => props.theme.colors.white};
+    background-color: ${(props) => props.theme.colors.primary};
   }
 `;
-
 export default function Landing() {
   // hook up current path to state
   const dispatch = useDispatch();
@@ -242,6 +255,16 @@ export default function Landing() {
           </div>
         </Content>
       </Hero>
+      <InstructionGrid>
+        <InstructionDiv>
+          <InstructionText>Create an account and log in</InstructionText>
+          <InstructionText>Add items to your menu</InstructionText>
+          <InstructionText>Download and print a QR code to display within your restaurant</InstructionText>
+        </InstructionDiv>
+        <StyledLazyLoad>
+          <DemoGif className="box-shadow" src={Demo} alt="Login image" />
+        </StyledLazyLoad>
+      </InstructionGrid>
       <CardContainer>
         <ToolCard>
           <CardIcon src={Soap} alt="Hand Sanitizer" />
@@ -267,34 +290,6 @@ export default function Landing() {
           </CardDescription>
         </ToolCard>
       </CardContainer>
-      <InstructionHeading>Easy as 3 Simple Steps</InstructionHeading>
-      <InstructionContainer>
-        <InstructionRow>
-          <InstructionColumn>
-            <InstructionIcon src={User} alt="User" />
-          </InstructionColumn>
-          <InstructionColumn>
-            Create an account with your business's information.
-          </InstructionColumn>
-        </InstructionRow>
-        <InstructionRow>
-          <InstructionColumn>
-            <InstructionIcon src={Form} alt="Form" />
-          </InstructionColumn>
-          <InstructionColumn>
-            Add your menu's items through your user portal.
-          </InstructionColumn>
-        </InstructionRow>
-        <InstructionRow>
-          <InstructionColumn>
-            <InstructionIcon src={QrCode} alt="Qr code" />
-          </InstructionColumn>
-          <InstructionColumn>
-            Download a QR code that corresponds to your restaurant's menu and
-            display in your restaurant!
-          </InstructionColumn>
-        </InstructionRow>
-      </InstructionContainer>
     </Container>
   );
 }

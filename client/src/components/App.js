@@ -17,9 +17,9 @@ import Footer from "./utility/Footer";
 const THEME = {
   colors: {
     primary: "#F10C45",
-    secondary: "#9a1750",
+    secondary: "#20C073",
     white: "#FFFFFF",
-    black: "#000000",
+    black: "#070D0D",
     grey: "#525252",
   },
   fonts: {

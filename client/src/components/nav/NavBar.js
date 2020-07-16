@@ -32,12 +32,12 @@ const ButtonGroup = styled.div`
 `;
 
 const LandingPageNavButton = styled(Link)`
-  color: ${(props) => props.theme.colors.white};
+  color: ${(props) => props.theme.colors.black};
   font-size: 2rem;
   text-decoration: none;
   cursor: pointer;
   &:hover {
-    border-bottom: solid 1px #fff;
+    border-bottom: solid 1px #000;
   }
   @media (max-width: 800px) {
     display: none;
@@ -45,10 +45,10 @@ const LandingPageNavButton = styled(Link)`
 `;
 
 const LandingPageSignUp = styled.button`
-  background-color: ${(props) => props.theme.colors.white};
+  background-color: ${(props) => props.theme.colors.black};
   padding: 0.5rem 2rem;
   font-size: 2rem;
-  color: ${(props) => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.white};
   border: none;
   outline: none;
   border-radius: 0.2rem;
@@ -81,10 +81,11 @@ const Hamburger = styled.div`
 const Burger = styled.span`
   height: 0.2rem;
   width: 3rem;
-  background-color: ${(props) =>
+  /* background-color: ${(props) =>
     props.path === "landing"
       ? props.theme.colors.white
-      : props.theme.colors.primary};
+      : props.theme.colors.primary}; */
+  background-color: ${(props) => props.theme.colors.black};
 `;
 
 const Menu = styled.div`
@@ -146,7 +147,7 @@ const RespNavLink = styled(Link)`
   &:not(:last-child) {
     margin-bottom: 5rem;
   }
-  color: ${(props) => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.black};
 `;
 
 const RespSignUpButton = styled(Link)`
@@ -156,10 +157,10 @@ const RespSignUpButton = styled(Link)`
 `;
 
 const HomeSignOutButton = styled(Button)`
-  color: ${(props) => props.theme.colors.white};
+  color: ${(props) => props.theme.colors.black};
   &:hover {
-    color: ${(props) => props.theme.colors.white};
-    border-bottom: solid 1px ${(props) => props.theme.colors.white};
+    color: ${(props) => props.theme.colors.black};
+    border-bottom: solid 1px ${(props) => props.theme.colors.black};
   }
 `;
 

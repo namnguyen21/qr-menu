@@ -1,6 +1,7 @@
 const express = require("express");
 const db = require("./models");
 const path = require("path");
+const https = require("express-https-redirect");
 require("dotenv").config();
 
 // db connection
@@ -17,12 +18,15 @@ app.use("/users", require("./routes/users"));
 app.use("/menu", require("./routes/menu"));
 app.use("/restaurant", require("./routes/restaurant"));
 
+//redirect to https 
+app.use("/", https());
+
 db.sequelize.sync({ force: false }).then(function () {
   app.listen(PORT, function () {
     console.log("App listening on PORT " + PORT);
   });
 });
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, './client/build/index.html'))
-})
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+});

@@ -111,7 +111,7 @@ module.exports = (restaurantName, qr) => {
                   </li>
               </ul>
               <div class="footer">
-                  Courtesy of easymenu.com
+                  Courtesy of snapmenu.us
               </div>
           </div>
   
