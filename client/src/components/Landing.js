@@ -80,37 +80,43 @@ const PhoneImg = styled.img`
 
 const Content = styled.div`
   @media (min-width: 800px) {
-    margin-top: 5rem;
+    margin-top: 2rem;
   }
   display: flex;
   flex-direction: column;
   justify-content: center;
   height: 75%;
-  > * {
-    &:not(:last-child) {
-      margin-bottom: 2rem;
+  /* > * {
+    @media (min-width: 800px) {
+      &:not(:last-child) {
+        margin-bottom: 2rem;
+      }
     }
-  }
+  } */
 `;
 
 const HeroHeading = styled.h1`
-  font-family: ${(props) => props.theme.fonts.logo};
-  font-size: 6rem;
+  font-family: ${(props) => props.theme.fonts.heading};
+  font-size: 7rem;
   font-weight: 700;
-  color: rgba(0, 0, 0, 0.6);
+  color: ${(props) => props.theme.colors.black};
   letter-spacing: 3px;
-  line-height: 1;
   margin-bottom: 2rem;
+  line-height: 1;
   @media (max-width: 800px) {
     font-size: 5rem;
+    margin-bottom: 1rem;
   }
 `;
 
 const HeroSubheading = styled.h2`
-  font-size: 3.7rem;
-  color: ${(props) => props.theme.colors.white};
+  font-size: 3rem;
+  color: rgba(255, 255, 255, 0.8);
   font-weight: 400;
   margin-bottom: 2rem;
+  @media (max-width: 800px) {
+    margin-bottom: 1rem;
+  }
 `;
 
 const HeroDescription = styled.p`
@@ -253,13 +259,10 @@ export default function Landing() {
         <QR src={QrCode} alt="QR Code" />
         <PhoneImg src={Phone} alt="iPhone Image" />
         <Content>
-          <HeroHeading>Snap Menu</HeroHeading>
+          <HeroHeading>Helping restaurants fight COVID-19</HeroHeading>
           <HeroSubheading>
             Ditch your old menus and go paperless.
           </HeroSubheading>
-          <HeroDescription>
-            Sign up today and instantly digitize your menu.
-          </HeroDescription>
           <div style={{ display: "flex", justifyContent: "center" }}>
             <Link to="/users/create">
               <StyledButton variant="filled">Get Started</StyledButton>

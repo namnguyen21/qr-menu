@@ -2,6 +2,7 @@ import React from "react";
 import { ThemeProvider } from "styled-components";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useSelector } from "react-redux";
+import HttpsRedirect from "react-https-redirect";
 
 import NavBar from "./nav/NavBar";
 import Container from "./utility/Container";
@@ -20,37 +21,40 @@ const THEME = {
     secondary: "#20C073",
     white: "#FFFFFF",
     black: "#070D0D",
-    grey: "#525252",
+    grey: "#425466",
   },
   fonts: {
-    logo: "'Galada', cursive",
+    logo: "'Fredoka One', cursive",
+    heading: "'Roboto', sans-serif",
   },
 };
 
 export default function App() {
   const auth = useSelector((state) => state.auth);
   return (
-    <ThemeProvider theme={THEME}>
-      <Router>
-        <GlobalStyles />
-        <NavBar />
-        <Container>
-          <Switch>
-            <Route path="/" exact component={Landing} />
-            <Route path="/users/create" exact component={CreateUser} />
-            <Route path="/users/login" exact component={Login} />
-            <Route path="/restaurant/:id" exact component={RestaurantMenu} />
-            {/* <Route path="/users/dashboard" exact component={Dashboard} /> */}
-            <ProtectedRoute
-              exact
-              to="/users/dashboard"
-              component={Dashboard}
-              auth={auth.isSignedIn}
-            />
-          </Switch>
-        </Container>
-        <Footer />
-      </Router>
-    </ThemeProvider>
+    <HttpsRedirect>
+      <ThemeProvider theme={THEME}>
+        <Router>
+          <GlobalStyles />
+          <NavBar />
+          <Container>
+            <Switch>
+              <Route path="/" exact component={Landing} />
+              <Route path="/users/create" exact component={CreateUser} />
+              <Route path="/users/login" exact component={Login} />
+              <Route path="/restaurant/:id" exact component={RestaurantMenu} />
+              {/* <Route path="/users/dashboard" exact component={Dashboard} /> */}
+              <ProtectedRoute
+                exact
+                to="/users/dashboard"
+                component={Dashboard}
+                auth={auth.isSignedIn}
+              />
+            </Switch>
+          </Container>
+          <Footer />
+        </Router>
+      </ThemeProvider>
+    </HttpsRedirect>
   );
 }
