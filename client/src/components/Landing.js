@@ -84,7 +84,7 @@ const Content = styled.div`
   }
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
   height: 75%;
   /* > * {
     @media (min-width: 800px) {
@@ -104,26 +104,20 @@ const HeroHeading = styled.h1`
   margin-bottom: 2rem;
   line-height: 1;
   @media (max-width: 800px) {
-    font-size: 5rem;
+    font-size: 4rem;
     margin-bottom: 1rem;
   }
 `;
 
 const HeroSubheading = styled.h2`
-  font-size: 3rem;
-  color: rgba(255, 255, 255, 0.8);
+  font-size: 2.2rem;
+  /* color: rgba(255, 255, 255, 0.8); */
+  color: ${(props) => props.theme.colors.grey};
   font-weight: 400;
   margin-bottom: 2rem;
   @media (max-width: 800px) {
     margin-bottom: 1rem;
   }
-`;
-
-const HeroDescription = styled.p`
-  font-size: 2.5rem;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 2rem;
 `;
 
 const CardContainer = styled.div`
@@ -261,7 +255,9 @@ export default function Landing() {
         <Content>
           <HeroHeading>Helping restaurants fight COVID-19</HeroHeading>
           <HeroSubheading>
-            Ditch your old menus and go paperless.
+            Restaurants now face the obstacle of maintaining safe conditions.
+            Paper menus require sanitization, and are a thing of the past.
+            Digital menus are now.
           </HeroSubheading>
           <div style={{ display: "flex", justifyContent: "center" }}>
             <Link to="/users/create">

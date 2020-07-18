@@ -22,6 +22,7 @@ const THEME = {
     white: "#FFFFFF",
     black: "#070D0D",
     grey: "#425466",
+    lightGrey: "#949494",
   },
   fonts: {
     logo: "'Fredoka One', cursive",
