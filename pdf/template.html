@@ -13,6 +13,7 @@
             box-sizing: border-box;
             font-size: 10px;
         }
+
         body {
             display: flex;
             justify-content: center;
@@ -27,56 +28,59 @@
             transform: translate(-50%, -50%); */
             margin: auto auto auto auto;
             background-color: #fff;
-            height: 50rem;
-            width: 50rem;
+            height: 40rem;
+            width: 40rem;
             border: solid 1px #000;
         }
 
         .relative {
             height: 100%;
             width: 100%;
-            padding: 3rem;
+            padding: 0;
             text-align: center;
             vertical-align: middle;
             position: relative;
+            padding: 5rem 0;
+            /* display: flex;
+            flex-direction: column;
+            justify-content: space-between; */
         }
 
         .content h1 {
-            font-size: 4rem;
-            color: #000000;
-            text-align: center;
-            font-weight: 300;
+            font-size: 3rem;
+            width: 100%;
+            color: #000;
+            font-weight: 400;
+            margin-bottom: 3rem;
         }
 
         .qr {
             text-align: center;
-            height: 25rem;
-            width: 25rem;
+            height: 15rem;
+            width: 15rem;
+            border: solid 5px #000;
+            margin: 10px auto 0;
+            /* position: absolute;
+            top: 50%;
+            left: 50%; */
+            /* transform: translate(-50%, -50%); */
             /* position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%); */
         }
 
-        ul {
-            list-style: none;
-            width: 30rem;
-            margin: auto;
-        }
-
-        li {
-            text-align: left;
-            font-size: 2rem;
-        }
 
         .footer {
             width: 100%;
             padding: 1rem;
             font-size: 2rem;
+            width: 100%;
             position: absolute;
+            border-top: solid 1px #ccc;
             bottom: 0;
             left: 0;
-            background-color: #F10C45;
+            background-color: #000000;
             text-align: center;
             vertical-align: middle;
             display: flex;
@@ -94,19 +98,11 @@
 <body>
     <div class="content">
         <div class="relative">
-            <h1 className="restaurant-name">My Restaurant</h1>
+            <h1 className="restaurant-name">Scan code to view menu</h1>
             <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJQAAACUCAYAAAB1PADUAAAAAklEQVR4AewaftIAAAS9SURBVO3BQY4bSRAEwfAC//9l3znmqYBGJ0crIczwR6qWnFQtOqladFK16KRq0UnVopOqRSdVi06qFp1ULTqpWnRSteikatFJ1aKTqkUnVYs+eQnIb1LzBJBJzQRkUnMDZJOaGyC/Sc0bJ1WLTqoWnVQt+mSZmk1ANgGZ1Dyh5gbIpGaTmk1ANp1ULTqpWnRSteiTLwPyhJongExqJjUTkCeATGomIJOa3wTkCTXfdFK16KRq0UnVok/+MUA2qblRMwGZ1NwAmdT8zU6qFp1ULTqpWvTJP0bNDZAJyBtqJjU3QCY1/5KTqkUnVYtOqhZ98mVqfhOQSc2NmgnIE0CeULNJzf/JSdWik6pFJ1WLPlkG5E9SMwGZ1ExAJjUTkEnNBGRSMwG5ATKpuQHyf3ZSteikatFJ1aJPXlLzNwFyA2RSMwGZ1Lyh5kbN3+SkatFJ1aKTqkX4Iy8AmdRMQDapuQEyqXkDyBtqJiA3aiYgm9R800nVopOqRSdViz55Sc0TaiYgN2pugExqJiCTmifUvAHkRs0E5A01TwCZ1LxxUrXopGrRSdUi/JFFQG7UTECeUPMEkBs1TwC5UbMJyBNq/qSTqkUnVYtOqhbhj7wAZFIzAblRMwGZ1ExAJjVPALlRMwGZ1ExAJjVvAJnU3AC5UTMBmdRsOqladFK16KRqEf7IC0AmNU8AmdRMQJ5QMwGZ1ExAJjVvAJnU3ACZ1LwB5EbNN51ULTqpWnRSteiTZUBu1DyhZgLyhJoJyKRmAnKj5kbNDZBJzQTkDTVPAJnUvHFSteikatFJ1aJP/ueAPAHkRs0bQCY1E5AbNZvUTEBu1ExqNp1ULTqpWnRSteiTZWpugExqbtT8SWomIBOQSc0mNTdAJjU3QCY1m06qFp1ULTqpWoQ/sgjIpGYCcqNmAjKpuQEyqbkBMqmZgLyhZgJyo+YNIDdqvumkatFJ1aKTqkWfvARkUjMBmdTcAJnUbAIyqblRcwNkUvOEmgnIG2omIDdAJjVvnFQtOqladFK1CH/kBSCTmhsgm9S8AWRScwNkUvNNQG7U3ACZ1HzTSdWik6pFJ1WLPvkyIE+ouQEyAfkmIJOaCcikZgJyo+ab1ExAJjWbTqoWnVQtOqlahD/yApBJzQ2QSc0E5EbNDZBJzQ2QSc0bQCY1E5BvUjMBeULNGydVi06qFp1ULcIf+YsBmdS8AeRGzQRkUjMBeULNE0A2qXnjpGrRSdWik6pFn7wE5DepmdT8JiC/Ccik5g0133RSteikatFJ1aJPlqnZBOQGyBNqnlAzAZnU3Ki5AXKj5gk1TwCZ1LxxUrXopGrRSdWiT74MyBNq/iQ1E5AngExqngCyCciNmk0nVYtOqhadVC365B+n5gbIpGZScwNkUvOEmk1AngAyqXnjpGrRSdWik6pFn/xj1HwTkEnNE0AmNTdAvknNppOqRSdVi06qFn3yZWq+Sc0EZBOQSc0mIDdqboDcqJmAfNNJ1aKTqkUnVYs+WQbkNwGZ1ExANgF5Qs2NmhsgN2pugExqvumkatFJ1aKTqkX4I1VLTqoWnVQtOqladFK16KRq0UnVopOqRSdVi06qFp1ULTqpWnRSteikatFJ1aKTqkX/AdNSQgbjCAo4AAAAAElFTkSuQmCC"
                 alt="" class="qr">
-            <ul>
-                <li>
-                    1. Scan QR Code on your phone.
-                </li>
-                <li>
-                    2. Browse the menu!
-                </li>
-            </ul>
             <div class="footer">
-                Courtesy of easymenu.com
+                Courtesy of snapmenu.us
             </div>
         </div>
 

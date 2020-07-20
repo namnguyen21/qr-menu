@@ -13,7 +13,7 @@ const Nav = styled.nav`
   position: relative;
   min-height: 5rem;
   @media (max-width: 800px) {
-    padding: 1rem 2rem 1rem 0;
+    padding: 1rem 2rem;
   }
 `;
 

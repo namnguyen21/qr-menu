@@ -111,8 +111,8 @@ const HeroHeading = styled.h1`
 
 const HeroSubheading = styled.h2`
   font-size: 2.2rem;
-  /* color: rgba(255, 255, 255, 0.8); */
-  color: ${(props) => props.theme.colors.grey};
+  color: rgba(255, 255, 255, 0.8);
+  /* color: ${(props) => props.theme.colors.white}; */
   font-weight: 400;
   margin-bottom: 2rem;
   @media (max-width: 800px) {
