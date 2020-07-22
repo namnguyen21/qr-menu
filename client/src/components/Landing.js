@@ -30,27 +30,29 @@ const BackgroundDiv = styled.div`
   background-position: center;
   z-index: -99999;
   @media (max-width: 800px) {
-    height: 100vh;
+    height: 60vh;
   }
 `;
 
 const Hero = styled.div`
-  height: 80vh;
   width: 100vw;
   /* background-color: ${(props) => props.theme.colors.primary}; */
   position: relative;
   @media (min-width: 1000px) {
     display: grid;
     grid-template-columns: 20% 25% 50%;
+    height: 80vh;
   }
   @media(min-width: 800px) and (max-width: 1000px){
     display: grid;
     grid-template-columns: 40% 60%;
+    height: 80vh;
   }
   @media (max-width: 800px) {
     display: block;
     padding: 0 2rem;
-    height: 70vh;
+    /* height: 70vh; */
+    margin-bottom: 10rem;
   }
 `;
 
@@ -81,11 +83,12 @@ const PhoneImg = styled.img`
 const Content = styled.div`
   @media (min-width: 800px) {
     margin-top: 2rem;
+    height: 75%;
   }
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  height: 75%;
+
   /* > * {
     @media (min-width: 800px) {
       &:not(:last-child) {
@@ -104,19 +107,19 @@ const HeroHeading = styled.h1`
   margin-bottom: 2rem;
   line-height: 1;
   @media (max-width: 800px) {
-    font-size: 4rem;
-    margin-bottom: 1rem;
+    font-size: 6rem;
+    margin: 3rem 0 5rem;
   }
 `;
 
 const HeroSubheading = styled.h2`
   font-size: 2.2rem;
   color: rgba(255, 255, 255, 0.8);
-  /* color: ${(props) => props.theme.colors.white}; */
   font-weight: 400;
   margin-bottom: 2rem;
   @media (max-width: 800px) {
-    margin-bottom: 1rem;
+    margin-bottom: 3rem;
+    color: ${(props) => props.theme.colors.grey};
   }
 `;
 
@@ -230,10 +233,14 @@ const StyledButton = styled(Button)`
   border: none;
   background-color: ${(props) => props.theme.colors.black};
   color: ${(props) => props.theme.colors.white};
-  border-radius: 4rem;
+  /* border-radius: 4rem; */
   padding: 1rem 2rem;
   &:hover {
-    background-color: ${(props) => props.theme.colors.primary};
+    background-color: ${(props) => props.theme.colors.black};
+    transform: translate(-2px, -5px);
+    -webkit-box-shadow: 10px 10px 41px -8px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 41px -8px rgba(0, 0, 0, 0.75);
+    box-shadow: 10px 10px 41px -8px rgba(0, 0, 0, 0.75);
   }
 `;
 export default function Landing() {

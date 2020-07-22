@@ -59,8 +59,18 @@ export default class User {
     return axios.get(`/restaurant/pdf/${this.id}`, {
       responseType: "arraybuffer",
       headers: {
-        Accept: 'application/pdf',
-    },
+        Accept: "application/pdf",
+      },
+    });
+  }
+
+  postCsv(csv) {
+    const data = new FormData();
+    data.append("file", csv);
+    return axios.post(`/menu/csv/${this.id}`, data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
     });
   }
 }

@@ -54,10 +54,12 @@ const LandingPageSignUp = styled.button`
   border-radius: 0.2rem;
   margin-left: 2rem;
   cursor: pointer;
+  transition: all 0.5s;
   &:hover {
-    -webkit-box-shadow: 0px 0px 44px -5px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 0px 0px 44px -5px rgba(0, 0, 0, 0.75);
-    box-shadow: 0px 0px 44px -5px rgba(0, 0, 0, 0.75);
+    transform: translate(-1px, -2px);
+    -webkit-box-shadow: 10px 10px 41px -8px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 41px -8px rgba(0, 0, 0, 0.75);
+    box-shadow: 10px 10px 41px -8px rgba(0, 0, 0, 0.75);
   }
   @media (max-width: 800px) {
     margin-right: 2rem;

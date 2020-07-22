@@ -8,6 +8,7 @@ import Card from "../utility/Card";
 import { createCategoriesList } from "../../helperFunctions";
 import AccountPanel from "./AccountPanel";
 import Restaurant from "../classes/Restaurant";
+import AccountContainer from "./AccountContainer";
 
 const Container = styled.div`
   min-height: 70vh;
@@ -263,82 +264,135 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <Container>
-      <a
-        id="download"
-        style={{ display: "none" }}
-        download="qr"
-        href={qr ? qr : null}
-        alt="Invisible download button"
-      ></a>
+    <AccountContainer
+    // qr={qr}
+    // auth={auth}
+    // onQrClick={onQrClick}
+    // onPdfClick={onPdfClick}
+    >
       <CreateModal
         categories={categories && categories}
         open={open}
         setOpen={setOpen}
         auth={auth}
       ></CreateModal>
-      <Title>{auth.restaurant}</Title>
-      <Grid>
-        {/* <AccountPanel /> */}
-        <Nav>
-          <ResponsiveA href={`/restaurant/${auth.id}`} target="_blank">
-            <ResponsiveBtn>
+      <Panel>
+        <Settings>
+          <Sort>
+            <Label>Sort by category: </Label>
+            <Select onChange={onSortChange} type="select">
+              {sorted ? <Option value="">View all</Option> : null}
+              {categories &&
+                categories.map((category, index) => (
+                  <Option key={index} value={category}>
+                    {category}
+                  </Option>
+                ))}
+              <Option value="" selected disabled hidden></Option>
+            </Select>
+          </Sort>
+          <IconButton onClick={() => setOpen(!open)}>+</IconButton>
+          <IconGroup>
+            <a href={`/restaurant/${auth.id}`} target="_blank">
               <i className="fas fa-table"></i>
-              <p>Go To Customer Menu</p>
-            </ResponsiveBtn>
-          </ResponsiveA>
-          <ResponsiveBtn onClick={onQrClick}>
-            <i className="fas fa-qrcode"></i>
-            <p>Download QR Code</p>
-          </ResponsiveBtn>
-          <ResponsiveBtn onClick={onPdfClick}>
-            <i className="far fa-file-pdf"></i>
-            <p>
-              Download Displayable PDF
-            </p>
-          </ResponsiveBtn>
-        </Nav>
-        <Panel>
-          <Settings>
-            <Sort>
-              <Label>Sort by category: </Label>
-              <Select onChange={onSortChange} type="select">
-                {sorted ? <Option value="">View all</Option> : null}
-                {categories &&
-                  categories.map((category, index) => (
-                    <Option key={index} value={category}>
-                      {category}
-                    </Option>
-                  ))}
-                <Option value="" selected disabled hidden></Option>
-              </Select>
-            </Sort>
-            <IconButton onClick={() => setOpen(!open)}>+</IconButton>
-            <IconGroup>
-              <a href={`/restaurant/${auth.id}`} target="_blank">
-                <i className="fas fa-table"></i>
-              </a>
-              <i onClick={onQrClick} className="fas fa-qrcode"></i>
-              <i onClick={onPdfClick} className="far fa-file-pdf"></i>
-            </IconGroup>
-          </Settings>
+            </a>
+            <i onClick={onQrClick} className="fas fa-qrcode"></i>
+            <i onClick={onPdfClick} className="far fa-file-pdf"></i>
+          </IconGroup>
+        </Settings>
 
-          {displayItems ? (
-            <CardContainer>
-              {displayItems.map((item) => (
-                <Card
-                  key={item.id}
-                  id={item.id}
-                  imageUrl={item.imageUrl}
-                  name={item.name}
-                  description={item.description}
-                  price={item.price}
-                />
-              ))}
-            </CardContainer>
-          ) : null}
-        </Panel>
-      </Grid>
-    </Container>
+        {displayItems ? (
+          <CardContainer>
+            {displayItems.map((item) => (
+              <Card
+                key={item.id}
+                id={item.id}
+                imageUrl={item.imageUrl}
+                name={item.name}
+                description={item.description}
+                price={item.price}
+              />
+            ))}
+          </CardContainer>
+        ) : null}
+      </Panel>
+    </AccountContainer>
+    // <Container>
+    //   <a
+    //     id="download"
+    //     style={{ display: "none" }}
+    //     download="qr"
+    //     href={qr ? qr : null}
+    //     alt="Invisible download button"
+    //   ></a>
+    //   <CreateModal
+    //     categories={categories && categories}
+    //     open={open}
+    //     setOpen={setOpen}
+    //     auth={auth}
+    //   ></CreateModal>
+    //   <Title>{auth.restaurant}</Title>
+    //   <Grid>
+
+    //     {/* <Nav>
+    //       <ResponsiveA href={`/restaurant/${auth.id}`} target="_blank">
+    //         <ResponsiveBtn>
+    //           <i className="fas fa-table"></i>
+    //           <p>Go To Customer Menu</p>
+    //         </ResponsiveBtn>
+    //       </ResponsiveA>
+    //       <ResponsiveBtn onClick={onQrClick}>
+    //         <i className="fas fa-qrcode"></i>
+    //         <p>Download QR Code</p>
+    //       </ResponsiveBtn>
+    //       <ResponsiveBtn onClick={onPdfClick}>
+    //         <i className="far fa-file-pdf"></i>
+    //         <p>
+    //           Download Displayable PDF
+    //         </p>
+    //       </ResponsiveBtn>
+    //     </Nav> */}
+    //     <Panel>
+    //       <Settings>
+    //         <Sort>
+    //           <Label>Sort by category: </Label>
+    //           <Select onChange={onSortChange} type="select">
+    //             {sorted ? <Option value="">View all</Option> : null}
+    //             {categories &&
+    //               categories.map((category, index) => (
+    //                 <Option key={index} value={category}>
+    //                   {category}
+    //                 </Option>
+    //               ))}
+    //             <Option value="" selected disabled hidden></Option>
+    //           </Select>
+    //         </Sort>
+    //         <IconButton onClick={() => setOpen(!open)}>+</IconButton>
+    //         <IconGroup>
+    //           <a href={`/restaurant/${auth.id}`} target="_blank">
+    //             <i className="fas fa-table"></i>
+    //           </a>
+    //           <i onClick={onQrClick} className="fas fa-qrcode"></i>
+    //           <i onClick={onPdfClick} className="far fa-file-pdf"></i>
+    //         </IconGroup>
+    //       </Settings>
+
+    //       {displayItems ? (
+    //         <CardContainer>
+    //           {displayItems.map((item) => (
+    //             <Card
+    //               key={item.id}
+    //               id={item.id}
+    //               imageUrl={item.imageUrl}
+    //               name={item.name}
+    //               description={item.description}
+    //               price={item.price}
+    //             />
+    //           ))}
+    //         </CardContainer>
+    //       ) : null}
+    //     </Panel>
+    //   </Grid>
+    // </Container>
   );
 }

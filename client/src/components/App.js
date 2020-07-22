@@ -13,6 +13,7 @@ import Dashboard from "./users/Dashboard";
 import Landing from "./Landing";
 import RestaurantMenu from "./restaurant/Menu";
 import GlobalStyles from "../GlobalStyle";
+import UploadCsv from "./users/UploadCsv"
 import Footer from "./utility/Footer";
 
 const THEME = {
@@ -44,13 +45,14 @@ export default function App() {
               <Route path="/users/create" exact component={CreateUser} />
               <Route path="/users/login" exact component={Login} />
               <Route path="/restaurant/:id" exact component={RestaurantMenu} />
-              {/* <Route path="/users/dashboard" exact component={Dashboard} /> */}
-              <ProtectedRoute
+              <Route path="/users/dashboard" exact component={Dashboard} />
+              <Route path="/users/upload/csv" exact component={UploadCsv} />
+              {/* <ProtectedRoute
                 exact
                 to="/users/dashboard"
                 component={Dashboard}
                 auth={auth.isSignedIn}
-              />
+              /> */}
             </Switch>
           </Container>
           <Footer />

@@ -4,6 +4,9 @@ import styled from "styled-components";
 const Btn = styled.button`
   font-size: 2rem;
   padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: ${(props) =>
     props.variant === "filled" || props.variant === "contained"
       ? `solid 1px ${props.theme.colors.black}`
@@ -40,12 +43,24 @@ const Btn = styled.button`
       props.variant === "contained"
         ? "#f7f7f7"
         : props.variant === "filled"
-        ? props.theme.colors.primary
+        ? props.theme.colors.black
         : "transparent"};
     border-bottom: ${(props) =>
       !props.variant ? `solid 1px ${props.theme.colors.black}` : null};
-    border: ${(props) =>
-      props.variant === "filled" ? `solid 1px ${props.theme.colors.primary} ` : null};
+    transform: ${(props) =>
+      props.variant === "filled" ? "translate(-1px, -2px)" : null};
+    -webkit-box-shadow: ${(props) =>
+      props.variant === "filled"
+        ? "10px 10px 41px -8px rgba(0, 0, 0, 0.75)"
+        : null};
+    -moz-box-shadow: ${(props) =>
+      props.variant === "filled"
+        ? "10px 10px 41px -8px rgba(0, 0, 0, 0.75)"
+        : null};
+    box-shadow: ${(props) =>
+      props.variant === "filled"
+        ? "10px 10px 41px -8px rgba(0, 0, 0, 0.75)"
+        : null};
   }
 
   i {

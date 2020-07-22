@@ -4,23 +4,24 @@ import { useDispatch } from "react-redux";
 import Modal from "react-modal";
 import Button from "../utility/Button";
 import User from "../classes/User";
+import Loader from "../utility/Loader"
 
-const LoaderAnimation = keyframes`
-  100% {
-			transform: rotate(360deg)
-	}
-`;
+// const LoaderAnimation = keyframes`
+//   100% {
+// 			transform: rotate(360deg)
+// 	}
+// `;
 
-const Loader = styled.span`
-  height: 3.6rem;
-  width: 3.6rem;
-  display: inline-block;
-  border: 0.4em solid transparent;
-  border-color: #eee;
-  border-top-color: #3e67ec;
-  border-radius: 50%;
-  animation: ${LoaderAnimation} 1s linear infinite;
-`;
+// const Loader = styled.span`
+//   height: 3.6rem;
+//   width: 3.6rem;
+//   display: inline-block;
+//   border: 0.4em solid transparent;
+//   border-color: #eee;
+//   border-top-color: #3e67ec;
+//   border-radius: 50%;
+//   animation: ${LoaderAnimation} 1s linear infinite;
+// `;
 
 const StyledModal = styled(Modal)`
   width: 40rem;
