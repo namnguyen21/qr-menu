@@ -22,7 +22,7 @@
     "bcrypt": "^5.0.0",
     "csv-parser": "^2.3.3",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "html-pdf": "^2.2.0",
     "multer": "^1.4.2",
     "mysql2": "^2.1.0",
